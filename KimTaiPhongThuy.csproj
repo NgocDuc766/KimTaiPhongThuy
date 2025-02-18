@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DbContext\**" />
+    <Content Remove="DbContext\**" />
+    <EmbeddedResource Remove="DbContext\**" />
+    <None Remove="DbContext\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="DataAccess\" />
     <Folder Include="Models\" />
-    <Folder Include="DbContext\" />
   </ItemGroup>
 
   <ItemGroup>
