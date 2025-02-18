@@ -1,3 +1,6 @@
+﻿using KimTaiPhongThuy.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using KimTaiPhongThuy.Models;
 namespace KimTaiPhongThuy
 {
     public class Program
@@ -6,8 +9,16 @@ namespace KimTaiPhongThuy
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Đọc chuỗi kết nối từ appsettings.json
+            var connectionString = builder.Configuration.GetConnectionString("MyCnn");
+
+            // Thêm DbContext vào DI container
+            builder.Services.AddDbContext<JewelryStoreContext>(options =>
+                options.UseSqlServer(connectionString));
+
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddScoped<AuthenticationDAO>();
 
             var app = builder.Build();
 
