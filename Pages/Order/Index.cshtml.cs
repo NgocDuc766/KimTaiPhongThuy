@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KimTaiPhongThuy.Pages.Order
@@ -14,8 +14,8 @@ namespace KimTaiPhongThuy.Pages.Order
         {
             CartItems = new List<CartItem>
             {
-                new CartItem { Name = "V�ng tay phong th?y", Code = "VT001", Quantity = 1, Price = 10000000, ImageUrl = "/images/vongtay.png" },
-                new CartItem { Name = "Nh?n b?c phong th?y", Code = "NB001", Quantity = 1, Price = 10000000, ImageUrl = "/images/nhanbac.png" }
+                new CartItem { Name = "Vòng tay phong thủy", Code = "VT001", Quantity = 1, Price = 10000000, ImageUrl = "/images/vongtay.png" },
+                new CartItem { Name = "Nhẫn bạc phong thủy", Code = "NB001", Quantity = 1, Price = 10000000, ImageUrl = "/images/nhanbac.png" }
             };
             Subtotal = CartItems.Sum(item => item.Price * item.Quantity);
             Discount = 0;
