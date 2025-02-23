@@ -1,0 +1,76 @@
+﻿@page
+@model KimTaiPhongThuy.Pages.Authentication.AccountModel
+@{
+    ViewData["Title"] = "Account";
+}
+
+<link rel="stylesheet" href="~/css/Authentication/Account.css" asp-append-version="true">
+
+<div class="cont @(Model.IsSignUp ? "s--signup" : "")">
+    <!-- Đăng nhập -->
+    <div class="form sign-in">
+        <h2>Welcome</h2>
+        <form method="post">
+            <label>
+                <span>UserName</span>
+                <input type="text" asp-for="UserName" required />
+            </label>
+            <label>
+                <span>Password</span>
+                <input type="password" asp-for="Password" required />
+            </label>
+            <p class="forgot-pass">Forgot password?</p>
+            <button type="submit" asp-page-handler="Login" class="submit">Sign In</button>
+        </form>
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <p style="color:red;">@Model.ErrorMessage</p>
+        }
+    </div>
+
+    <div class="sub-cont">
+        <div class="img">
+            <div class="img__text m--up">
+                <h3>Don't have an account? Please Sign up!</h3>
+            </div>
+            <div class="img__text m--in">
+                <h3>If you already have an account, just sign in.</h3>
+            </div>
+            <div class="img__btn">
+                <span class="m--up">Sign Up</span>
+                <span class="m--in">Sign In</span>
+            </div>
+        </div>
+
+        <!-- Đăng ký -->
+        <div class="form sign-up">
+            <h2>Create your Account</h2>
+            <form method="post">
+                <label>
+                    <span>Name</span>
+                    <input type="text" asp-for="User.UserName" required />
+                </label>
+                <label>
+                    <span>Email</span>
+                    <input type="email" asp-for="User.Email" required />
+                </label>
+                <label>
+                    <span>Password</span>
+                    <input type="password" asp-for="User.PassWord" required />
+                </label>
+                
+                <button type="submit" asp-page-handler="Register" class="submit">Sign Up</button>
+            </form>
+            @if (!string.IsNullOrEmpty(Model.Message))
+            {
+                <p style="color:red;">@Model.Message</p>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('.img__btn').addEventListener('click', function () {
+        document.querySelector('.cont').classList.toggle('s--signup');
+    });
+</script>

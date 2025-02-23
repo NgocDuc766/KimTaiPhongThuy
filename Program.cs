@@ -1,3 +1,8 @@
+﻿using KimTaiPhongThuy.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using KimTaiPhongThuy.Models;
+using Microsoft.AspNetCore.Identity;
+using KimTaiPhongThuy.DataAccess.Service;
 namespace KimTaiPhongThuy
 {
     public class Program
@@ -6,8 +11,20 @@ namespace KimTaiPhongThuy
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Đọc chuỗi kết nối từ appsettings.json
+            var connectionString = builder.Configuration.GetConnectionString("MyCnn");
+
+            // Thêm DbContext vào DI container
+            builder.Services.AddDbContext<JewelryStoreContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            // Đăng ký PasswordHasher vào DI container
+            builder.Services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>(); // Thêm dòng này
+            builder.Services.AddSingleton<PasswordHasherService>(); // Đăng ký
+            builder.Services.AddSingleton<EmailService>();
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddScoped<AuthenticationDAO>();
 
             var app = builder.Build();
 
