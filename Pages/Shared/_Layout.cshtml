@@ -10,22 +10,73 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">KimTaiPhongThuy</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <nav class="secondary-nav border-top border-bottom">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="top-menu d-flex flex-wrap justify-content-between">
+                        <div class="left-block d-flex flex-wrap list-unstyled justify-content-start">
+                            @* search bar nằm bên trái header*@
+                            <li class="menu-item">
+                                <form class="searchbar">
+                                    <input type="text" name="search" placeholder="Search Here..">
+                                    <i class="icon icon-search"></i>
+                                </form>
+                            </li>
+                        </div>
+                        <div class="right-block d-flex flex-wrap justify-content-center">
+                            <div class="main-logo">
+                                <a href="index.html">
+                                    <img src="images/main-logo.png" alt="logo">
+                                </a>
+                            </div>
+                        </div>
+                            @*menu bên phải header: login/logout....*@
+                        <ul class="right-block d-flex flex-wrap list-unstyled justify-content-end">                            <li class="menu-item">
+                            <li class="menu-item">
+                                <a href="#">
+                                    <i class="icon icon-user"></i>Login
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <nav class="secondary-nav">
+            <div class="container-fluid">
+                <div class="row d-flex flex-wrap justify-content-center">
+                    <div class="col-md-8 col-sm-10">
+                        <div class="navbar d-flex">
+                            <div class="main-menu stellarnav desktop light">
+                                <ul class="menu-list list-unstyled">
+                                    <li class="menu-item">
+                                        <a href="index.html" class="text-uppercase item-anchor">Trang chủ</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="about.html" class="text-uppercase item-anchor">Tư vấn nhanh</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="shop.html" class="text-uppercase item-anchor">Sản phẩm</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="#" class="text-uppercase item-anchor">Blog</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="blog.html" class="text-uppercase item-anchor">Về chúng tôi</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="https://templatesjungle.gumroad.com/l/gemstone-free-html-css-ecommerce-template" target="_blank" class="text-uppercase btn btn-outline-dark m-0 rounded-pill">Get PRO</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="hamburger">
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
