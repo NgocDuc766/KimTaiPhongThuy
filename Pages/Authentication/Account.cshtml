@@ -58,6 +58,7 @@
                     <span>Password</span>
                     <input type="password" asp-for="User.PassWord" required />
                 </label>
+                
                 <button type="submit" asp-page-handler="Register" class="submit">Sign Up</button>
             </form>
             @if (!string.IsNullOrEmpty(Model.Message))

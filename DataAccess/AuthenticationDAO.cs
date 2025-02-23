@@ -35,5 +35,10 @@ namespace KimTaiPhongThuy.DataAccess
         {
             return _context.Users.FirstOrDefault(u => u.UserName == username);
         }
+        // Phương thức lấy người dùng qua email
+        public User GetUserByEmail(string email)
+        {
+            return _context.Users.FirstOrDefault(u => u.Email == email);
+        }
     }
 }
