@@ -1,0 +1,56 @@
+﻿@page
+@model KimTaiPhongThuy.Pages.Order.IndexModel
+@{
+}
+<div class="container">
+    <h2 class="text-center">Giỏ hàng</h2>
+
+    @foreach (var item in Model.CartItems)
+    {
+        <div class="cart-item d-flex align-items-center mb-3">
+            <img src="~/images/wedding-ring.png" alt="@item.Name" class="cart-item-image" />
+            <div class="cart-item-details">
+                <h5>@item.Name</h5>
+                <p>Mã sản phẩm: @item.Code</p>
+                <p>SL: @item.Quantity</p>
+                <p>Giá: @item.Price.ToString("N0") VND</p>
+            </div>
+        </div>
+    }
+
+    <div class="cart-summary">
+        <p>Tạm tính: <span class="float-end">@Model.Subtotal.ToString("N0") VND</span></p>
+        <p>Giảm giá: <span class="float-end">@Model.Discount.ToString("N0") VND</span></p>
+        <p><strong>Tổng: <span class="float-end">@Model.Total.ToString("N0") VND</span></strong></p>
+    </div>
+
+    <div class="text-center mt-4">
+        <button class="btn btn-secondary btn-lg">Tiếp tục</button>
+    </div>
+</div>
+
+<style>
+    .cart-item {
+        display: flex;
+        gap: 15px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+    }
+    .cart-item-image {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+    }
+    .cart-item-details {
+        flex-grow: 1;
+    }
+    .cart-summary {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+    .btn-secondary {
+        background-color: #ccc;
+        color: black;
+        font-weight: bold;
+    }
+</style>
