@@ -24,4 +24,9 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\ProductList\.DS_Store" />
+    <None Include="wwwroot\js\ProductList\.DS_Store" />
+  </ItemGroup>
+
 </Project>

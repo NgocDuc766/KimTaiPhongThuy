@@ -1,0 +1,217 @@
+﻿@page
+@model KimTaiPhongThuy.Pages.Products.ProductListModel
+@{
+}
+    <link rel="stylesheet" type="text/css" href="~/css/ProductList/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="~/css/ProductList/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="~/css/ProductList/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="~/css/ProductList/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- font awesome -->
+    @* <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> *@
+    <!--  -->
+    <!-- owl stylesheets -->
+    @* <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext" rel="stylesheet"> *@
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesoeet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!-- banner bg main start -->
+    <div class="banner_bg_main">
+        <!-- logo section end -->
+        <!-- header section start -->
+        <div class="header_section">
+            <div class="container">
+                <div class="containt_main">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            All Category
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                    <div class="main">
+                        <!-- Another variation with a button -->
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search for...">
+                            <div class="input-group-append">
+                            <button class="btn btn-secondary" type="button" style="background-color: #8C0000; border-color:#8C0000 ">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header_box">
+                        <div class="login_menu">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <span class="padding_10">Cart</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                        <span class="padding_10">Cart</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner bg main end -->
+    <!-- jewellery  section start -->
+    <div class="jewellery_section mt-4">
+        <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container">
+                        <h1 class="fashion_taital">Sản phẩm phong thủy</h1>
+                        <div class="fashion_section_2">
+                            <div class="row">
+                               @*  <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                        <h4 class="shirt_text">Jumkas</h4>
+                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
+                                        <div class="jewellery_img"><img src="~/images/SP5.png></div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
+                                            <div class="seemore_bt"><a href="#">See More</a></div>
+                                        </div>
+                                    </div>
+                                </div> *@
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                    <h4 class="shirt_text">Vòng ngọc mã não</h4>
+                                        <p class="price_text">Giá Bán  <span style="color: #262626;">1.400.000VNĐ</span></p>
+                                        <div class="jewellery_img"><img src="~/images/SP2.2.png"></div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a href="#">Mua Ngay</a></div>
+                                            <div class="seemore_bt"><a href="#">Xem Thêm</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                    <h4 class="shirt_text">Vòng ngọc Myanmar</h4>
+                                        <p class="price_text">Giá bán  <span style="color: #262626;">1.500.000VNĐ</span></p>
+                                        <div class="jewellery_img"><img src="~/images/SP4.png"></div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a href="#">Mua Ngay</a></div>
+                                            <div class="seemore_bt"><a href="#">Xem Thêm</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <h1 class="fashion_taital">Jewellery Accessories</h1>
+                        <div class="fashion_section_2">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                        <h4 class="shirt_text">Jumkas</h4>
+                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
+                                        <div class="jewellery_img"><img src="images/jhumka-img.png"></div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
+                                            <div class="seemore_bt"><a href="#">See More</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                        <h4 class="shirt_text">Necklaces</h4>
+                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
+                                        <div class="jewellery_img"><img src="images/neklesh-img.png"></div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
+                                            <div class="seemore_bt"><a href="#">See More</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                        <h4 class="shirt_text">Kangans</h4>
+                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
+                                        <div class="jewellery_img"><img src="images/kangan-img.png"></div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
+                                            <div class="seemore_bt"><a href="#">See More</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="container">
+                        <h1 class="fashion_taital">Jewellery Accessories</h1>
+                        <div class="fashion_section_2">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                        <h4 class="shirt_text">Jumkas</h4>
+                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
+                                        <div class="jewellery_img"><img src="images/jhumka-img.png"></div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
+                                            <div class="seemore_bt"><a href="#">See More</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                        <h4 class="shirt_text">Necklaces</h4>
+                                        <p class="price_text">Giá bán  <span style="color: #262626;">$ 100</span></p>
+                                        <div class="jewellery_img"><img src="images/neklesh-img.png"></div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a href="#">Mua Ngay</a></div>
+                                            <div class="seemore_bt"><a href="#">Xem Thêm</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="box_main">
+                                        <h4 class="shirt_text">Kangans</h4>
+                                        <p class="price_text">Giá bán  <span style="color: #262626;">$ 100</span></p>
+                                        <div class="jewellery_img"><img src="images/kangan-img.png"></div>
+                                        <div class="btn_main">
+                                            <div class="buy_bt"><a href="#">Mua Ngay</a></div>
+                                            <div class="seemore_bt"><a href="#">Xem Thêm</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jewellery  section end -->
+    <!-- Javascript files-->
+    <script src="~/js/ProductList/jquery.min.js"></script>
+    <script src="~/js/ProductList/popper.min.js"></script>
+    <script src="~/js/ProductList/bootstrap.bundle.min.js"></script>
+    <script src="~/js/ProductList/jquery-3.0.0.min.js"></script>
+    <script src="~/js/ProductList/plugin.js"></script>
+    <!-- sidebar -->
+    <script src="~/js/ProductList/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/js/ProductList/custom.js"></script>

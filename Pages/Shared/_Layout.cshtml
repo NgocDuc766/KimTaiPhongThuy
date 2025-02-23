@@ -25,41 +25,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Poiret+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header b-86zuwu24vm="">
-        <nav b-86zuwu24vm="" class="secondary-nav border-top border-bottom">
-            <div b-86zuwu24vm="" class="container-fluid">
-                <div b-86zuwu24vm="" class="row">
-                    <div b-86zuwu24vm="" class="top-menu d-flex flex-wrap justify-content-between" style="
-    background-color: darkred;
-">
-                        <div b-86zuwu24vm="" class="left-block d-flex flex-wrap list-unstyled justify-content-start">
-                            <li b-86zuwu24vm="" class="menu-item">
+    <header>
+        <nav class="secondary-nav border-top border-bottom">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="top-menu d-flex flex-wrap justify-content-between">
+                        <div class="left-block d-flex flex-wrap list-unstyled justify-content-start">
+                            @* search bar nằm bên trái header*@
+                            <li class="menu-item">
                                 <form class="searchbar">
-                                    <input b-86zuwu24vm="" type="text" name="search" placeholder="Search Here.." spellcheck="false" data-ms-editor="true">
-                                    <i b-86zuwu24vm="" class="icon icon-search"></i>
+                                    <input type="text" name="search" placeholder="Search Here..">
+                                    <i class="icon icon-search"></i>
                                 </form>
                             </li>
                         </div>
-                        <div b-86zuwu24vm="" class="right-block d-flex flex-wrap justify-content-center">
-                            <div b-86zuwu24vm="" class="main-logo">
-                                <a b-86zuwu24vm="" href="index">
-                                    <abbr b-86zuwu24vm="" style="
-    color: yellow;
-    font-size: 30px;
-    font-weight: bold;
-    /* font-family: -webkit-body; */
-">KIM TAI PHONG THUY</abbr>
+                        <div class="right-block d-flex flex-wrap justify-content-center">
+                            <div class="main-logo">
+                                <a href="index.html">
+                                    <img src="images/logo-kimtaiphongthuy.png" alt="logo" style="height:70px; width:300px">
                                 </a>
                             </div>
                         </div>
-                        <ul b-86zuwu24vm="" class="right-block d-flex flex-wrap list-unstyled justify-content-end">
-                            <li b-86zuwu24vm="" class="menu-item">
-                            </li>
-                            <li b-86zuwu24vm="" class="menu-item">
-                                <a b-86zuwu24vm="" href="/Authentication/Account" style="
-    color: yellow;
-">
-                                    <i b-86zuwu24vm="" class="icon icon-user"></i>Login
+                            @*menu bên phải header: login/logout....*@
+                        <ul class="right-block d-flex flex-wrap list-unstyled justify-content-end">                            <li class="menu-item">
+                            <li class="menu-item">
+                                <a href="/Authentication/Account">
+                                    <i class="icon icon-user"></i>Login
                                 </a>
                             </li>
                         </ul>
@@ -68,55 +59,40 @@
                 </div>
             </div>
         </nav>
-        <nav b-86zuwu24vm="" class="secondary-nav">
-            <div b-86zuwu24vm="" class="container-fluid">
-                <div b-86zuwu24vm="" class="row d-flex flex-wrap justify-content-center" style="
-    color: yellow;
-    background-color: darkred;
-">
-                    <div b-86zuwu24vm="" class="col-md-8 col-sm-10">
-                        <div b-86zuwu24vm="" class="navbar d-flex">
-                            <div b-86zuwu24vm="" class="main-menu stellarnav desktop light">
-                                <ul b-86zuwu24vm="" class="menu-list list-unstyled">
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="index" class="text-uppercase item-anchor" style="
-    color: yellow;
-">Trang chủ</a>
+        <nav class="secondary-nav">
+            <div class="container-fluid">
+                <div class="row d-flex flex-wrap justify-content-center">
+                    <div class="col-md-8 col-sm-10">
+                        <div class="navbar d-flex">
+                            <div class="main-menu stellarnav desktop light">
+                                <ul class="menu-list list-unstyled">
+                                    <li class="menu-item">
+                                        <a href="/index" class="text-uppercase item-anchor">Trang chủ</a>
                                     </li>
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="/chat" class="text-uppercase item-anchor" style="
-    color: yellow;
-">Tư vấn nhanh</a>
+                                    <li class="menu-item">
+                                        <a href="/chat" class="text-uppercase item-anchor">Tư vấn nhanh</a>
                                     </li>
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="shop.html" class="text-uppercase item-anchor" style="
-    color: yellow;
-">Sản phẩm</a>
+                                    <li class="menu-item">
+                                        <a href="/Products/ProductList" class="text-uppercase item-anchor">Sản phẩm</a>
                                     </li>
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="#" class="text-uppercase item-anchor" style="
-    color: yellow;
-">Blog</a>
+                                    <li class="menu-item">
+                                        <a href="#" class="text-uppercase item-anchor">Blog</a>
                                     </li>
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="blog.html" class="text-uppercase item-anchor" style="
-    color: yellow;
-">Về chúng tôi</a>
+                                    <li class="menu-item">
+                                        <a href="blog.html" class="text-uppercase item-anchor">Về chúng tôi</a>
                                     </li>
                                 </ul>
                             </div>
-                            <div b-86zuwu24vm="" class="hamburger">
-                                <span b-86zuwu24vm="" class="bar"></span>
-                                <span b-86zuwu24vm="" class="bar"></span>
-                                <span b-86zuwu24vm="" class="bar"></span>
+                            <div class="hamburger">
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
-
-
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -125,39 +101,36 @@
     </div>
 
     @*     <footer class="border-top footer text-muted">
-    <div class="container">
-    &copy; 2025 - KimTaiPhongThuy - <a asp-area="" asp-page="/Privacy">Privacy</a>
-    </div>
+        <div class="container">
+            &copy; 2025 - KimTaiPhongThuy - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
     </footer> *@
     <footer id="footer" class="bg-grey padding-large overflow-hidden">
         <div class="container">
             <div class="row">
                 <div class="footer-content">
                     <div class="row d-flex flex-wrap">
-                        <div class="footer-menu col-md-2 col-sm-6 col-xs-6">
+                        <div class="footer-menu col-md-4 col-sm-6 col-xs-6">
                             <h5 class="widget-title text-uppercase">Quick Links</h5>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="index.html">Home</a>
+                                    <a href="/index">Trang Chủ</a>
                                 </li>
                                 <li>
-                                    <a href="shop.html">Shop</a>
-                                </li>
-                                <li>
-                                    <a href="single-product.html">Products</a>
+                                    <a href="/Products/ProductList">Sản phẩm</a>
                                 </li>
                                 <li>
                                     <a href="#">Blog</a>
                                 </li>
                                 <li>
-                                    <a href="about.html">About Us</a>
+                                    <a href="#">About Us</a>
                                 </li>
                                 <li>
-                                    <a href="contact.html">Contact Us</a>
+                                    <a href="#">Contact Us</a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="footer-menu col-md-3 col-sm-6 col-xs-6">
+                        <div class="footer-menu col-md-4 col-sm-6 col-xs-6">
                             <h5 class="widget-title text-uppercase">Your Account</h5>
                             <ul class="list-unstyled">
                                 <li>
@@ -169,67 +142,31 @@
                                 <li>
                                     <a href="#">Wish Lists</a>
                                 </li>
-                                <li>
-                                    <a href="#">My Addresses</a>
-                                </li>
-                                <li>
-                                    <a href="#">My Orders</a>
-                                </li>
                             </ul>
                         </div>
                         <div class="footer-menu col-md-4 col-sm-6 col-xs-6">
-                            <h5 class="widget-title text-uppercase">Special Products</h5>
-                            <div class="footer-post d-flex flex-wrap">
-                                <div class="post-image">
-                                    <img src="images/dring.jpg" alt="post" class="footer-image">
-                                </div>
-                                <div class="text-block">
-                                    <a href="#">Diamond Crescent Silver Ring</a>
-                                    <span class="meta-price text-primary">$28.00</span>
-                                </div>
-                            </div>
-                            <div class="footer-post d-flex flex-wrap">
-                                <div class="post-image">
-                                    <img src="images/dring.jpg" alt="post" class="footer-image">
-                                </div>
-                                <div class="text-block">
-                                    <a href="#">Diamond Crescent Golden Ring</a>
-                                    <span class="meta-price text-primary">$48.00</span>
-                                </div>
-                            </div>
-                            <div class="footer-post d-flex flex-wrap">
-                                <div class="post-image">
-                                    <img src="images/dtop.jpg" alt="post" class="footer-image">
-                                </div>
-                                <div class="text-block">
-                                    <a href="#">Diamond Crescent Curve Ring</a>
-                                    <span class="meta-price text-primary">$58.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="footer-menu col-md-3 col-sm-6 col-xs-6">
-                            <img src="images/WEB/logokiim.png" alt="main-logo" class="img-fluid mb-4">
+                            <img src="images/logo-kimtaiphongthuy.png" alt="main-logo" class="img-fluid mb-4">
                             <div class="content">
                                 <div class="widget-content">
-                                    <p>Stay Updated With Us For News And Offers</p>
+                                    <p>Cập nhật những tin tức mới nhất</p>
                                     <div class="newsletter-button d-flex flex-wrap align-items-center">
-                                        <input type="text" name="Subscribe" placeholder="Your Email Address">
-                                        <button class="btn btn-primary">Subscribe</button>
+                                        <input type="text" name="Subscribe" placeholder="Email của bạn">
+                                        <button class="btn btn-primary">Đăng ký</button>
                                     </div>
                                 </div>
                                 <div class="widget-content">
                                     <div class="address">
                                         <ul class="list-unstyled">
                                             <li>
-                                                <i class="icon icon-location text-primary"></i>PO Box 1612 Collin Street, NYC
+                                                <i class="icon icon-location text-primary"></i>Khu CN Cao Hòa Lạc, Thạch Thất, Hà Nội
                                             </li>
                                             <li>
-                                                <i class="icon icon-phone text-primary"></i>(+801) - 2345 - 6789
+                                                <i class="icon icon-phone text-primary"></i>+84 123 456 789
                                             </li>
                                             <li>
                                                 <i class="icon icon-envelope text-primary"></i>
                                                 <div class="mail-address">
-                                                    <a href="kimtaiphongthuy@gmail.com" class="">kimtaiphongthuy@gmail.com</a>
+                                                    <a href="mailto:hello@templatesjungle.com" class="">kimtaiphongthuy@gmail.com</a>
                                                 </div>
                                             </li>
                                         </ul>
@@ -250,8 +187,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
-    <!-- Linking custom script -->
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
