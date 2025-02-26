@@ -25,7 +25,7 @@ namespace KimTaiPhongThuy.Pages.Authentication
         [BindProperty]
         public string Password { get; set; }
 
-        
+
 
         [BindProperty]
         public User User { get; set; } = new User();
@@ -34,7 +34,7 @@ namespace KimTaiPhongThuy.Pages.Authentication
         public string Message { get; set; }
         public bool IsSignUp { get; set; } = false;
 
-        
+
 
         public void OnGet(string? mode)
         {
@@ -86,7 +86,7 @@ namespace KimTaiPhongThuy.Pages.Authentication
                 return Page();
             }
 
-            
+
 
             // Kiểm tra và thêm giá trị mặc định nếu các trường thiếu
             if (string.IsNullOrEmpty(User.Address))

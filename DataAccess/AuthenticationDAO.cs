@@ -33,7 +33,7 @@ namespace KimTaiPhongThuy.DataAccess
         }
         public User? GetUserByUsername(string username)
         {
-            return _context.Users.FirstOrDefault(u => u.UserName == username);
+            return _context.Users.SingleOrDefault(u => u.UserName == username);
         }
         // Phương thức lấy người dùng qua email
         public User GetUserByEmail(string email)
