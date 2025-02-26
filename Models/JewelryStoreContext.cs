@@ -48,7 +48,7 @@ namespace KimTaiPhongThuy.Models
             modelBuilder.Entity<ChatHistory>(entity =>
             {
                 entity.HasKey(e => e.ChatId)
-                    .HasName("PK__ChatHist__A9FBE62602C4D6C1");
+                    .HasName("PK__ChatHist__A9FBE62646C76512");
 
                 entity.ToTable("ChatHistory");
 
@@ -66,7 +66,7 @@ namespace KimTaiPhongThuy.Models
                     .WithMany(p => p.ChatHistories)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ChatHisto__UserI__36B12243");
+                    .HasConstraintName("FK__ChatHisto__UserI__6EF57B66");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -87,13 +87,13 @@ namespace KimTaiPhongThuy.Models
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Orders__User_ID__398D8EEE");
+                    .HasConstraintName("FK__Orders__User_ID__71D1E811");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
                 entity.HasKey(e => e.OrderDetailsId)
-                    .HasName("PK__OrderDet__9DD74D9D5CCBD81E");
+                    .HasName("PK__OrderDet__9DD74D9D6CF94190");
 
                 entity.Property(e => e.OrderDetailsId).HasColumnName("OrderDetailsID");
 
@@ -105,13 +105,13 @@ namespace KimTaiPhongThuy.Models
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Order__37A5467C");
+                    .HasConstraintName("FK__OrderDeta__Order__6FE99F9F");
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OrderDeta__Produ__38996AB5");
+                    .HasConstraintName("FK__OrderDeta__Produ__70DDC3D8");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -146,7 +146,7 @@ namespace KimTaiPhongThuy.Models
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Products__Catego__3A81B327");
+                    .HasConstraintName("FK__Products__Catego__72C60C4A");
             });
 
             modelBuilder.Entity<Review>(entity =>
@@ -171,13 +171,13 @@ namespace KimTaiPhongThuy.Models
                     .WithMany(p => p.Reviews)
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Review__ProductI__3B75D760");
+                    .HasConstraintName("FK__Review__ProductI__73BA3083");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Reviews)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Review__UserID__3C69FB99");
+                    .HasConstraintName("FK__Review__UserID__74AE54BC");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -212,7 +212,7 @@ namespace KimTaiPhongThuy.Models
 
                 entity.Property(e => e.Email).HasMaxLength(200);
 
-                entity.Property(e => e.PassWord).HasMaxLength(50);
+                entity.Property(e => e.PassWord).HasMaxLength(250);
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(15);
 
@@ -226,7 +226,7 @@ namespace KimTaiPhongThuy.Models
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User__Role_ID__3D5E1FD2");
+                    .HasConstraintName("FK__User__Role_ID__75A278F5");
             });
 
             OnModelCreatingPartial(modelBuilder);
