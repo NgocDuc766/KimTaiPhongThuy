@@ -47,45 +47,23 @@
                                 </a>
                             </div>
                         </div>
-                        <ul class="right-block d-flex flex-wrap list-unstyled justify-content-end">
-                            @if (Context.Session.GetString("ErrorMessage") != null)
-                            {
-                                <div class="alert alert-warning" style="position: absolute; top: 20px; right: 20px; z-index: 999;">
-                                    @Context.Session.GetString("ErrorMessage")
-                                </div>
-                                @* Sau khi hiển thị thông báo, xóa thông báo khỏi session *@
-                                Context.Session.Remove("ErrorMessage");
-                            }
-
-                            <li class="menu-item">
-                                @if (Context.Session.GetString("UserName") != null)
-                                {
-                                    <a href="Authentication/Profile" style="color: yellow;">
-                                        <i class="icon icon-user"></i>@Context.Session.GetString("UserName")
-                                    </a>
-                                    @* <!-- Nút Logout -->
-                                <form method="post" asp-page-handler="Logout" style="display:inline;">
-                                <button type="submit" name="logout" value="true" style="background: none; border: none; color: yellow; cursor: pointer;">
-                                <i class="icon icon-logout"></i> Logout
-                                </button>
-                                </form> *@
-                                }
-                                else
-                                {
-                                    <a href="/Authentication/Account" style="color: yellow;">
-                                        <i class="icon icon-user"></i>Login
-                                    </a>
-                                }
+                        <ul b-86zuwu24vm="" class="right-block d-flex flex-wrap list-unstyled justify-content-end">
+                            <li b-86zuwu24vm="" class="menu-item">
+                            </li>
+                            <li b-86zuwu24vm="" class="menu-item">
+                                <a b-86zuwu24vm="" href="/Authentication/Account" style="
+    color: yellow;
+">
+                                    <i b-86zuwu24vm="" class="icon icon-user"></i>Login
+                                </a>
                             </li>
                         </ul>
-
-
 
                     </div>
                 </div>
             </div>
         </nav>
-        @* <nav b-86zuwu24vm="" class="secondary-nav">
+        <nav b-86zuwu24vm="" class="secondary-nav">
             <div b-86zuwu24vm="" class="">
                 <div b-86zuwu24vm="" class="row d-flex flex-wrap justify-content-center">
                     <div b-86zuwu24vm="" class="col-md-8 col-sm-10">
@@ -128,75 +106,7 @@
                     </div>
                 </div>
             </div>
-        </nav> *@
-        <nav b-86zuwu24vm="" class="secondary-nav">
-            <div b-86zuwu24vm="" class="">
-                <div b-86zuwu24vm="" class="row d-flex flex-wrap justify-content-center">
-                    <div b-86zuwu24vm="" class="col-md-8 col-sm-10">
-                        <div b-86zuwu24vm="" class="navbar d-flex">
-                            <div b-86zuwu24vm="" class="main-menu stellarnav desktop light">
-                                <ul b-86zuwu24vm="" class="menu-list list-unstyled">
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="/index" class="text-uppercase item-anchor" style="color: yellow;">
-                                            Trang chủ
-                                        </a>
-                                    </li>
-
-                                    <!-- Tư vấn nhanh -->
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        @if (Context.Session.GetString("UserName") != null)
-                                        {
-                                            <a b-86zuwu24vm="" href="/chat" class="text-uppercase item-anchor" style="color: yellow;">
-                                                Tư vấn nhanh
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a href="/Authentication/Account" class="text-uppercase item-anchor" style="color: yellow;">
-                                                Tư vấn nhanh
-                                            </a>
-                                        }
-                                    </li>
-
-                                    <!-- Sản phẩm -->
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        @if (Context.Session.GetString("UserName") != null)
-                                        {
-                                            <a b-86zuwu24vm="" href="/Products/ProductList" class="text-uppercase item-anchor" style="color: yellow;">
-                                                Sản phẩm
-                                            </a>
-                                        }
-                                        else
-                                        {
-                                            <a href="/Authentication/Account" class="text-uppercase item-anchor" style="color: yellow;">
-                                                Sản phẩm
-                                            </a>
-                                        }
-                                    </li>
-
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="/Blog" class="text-uppercase item-anchor" style="
-    color: yellow;
-">Blog</a>
-                                    </li>
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="blog.html" class="text-uppercase item-anchor" style="
-    color: yellow;
-">Về chúng tôi</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div b-86zuwu24vm="" class="hamburger">
-                                <span b-86zuwu24vm="" class="bar"></span>
-                                <span b-86zuwu24vm="" class="bar"></span>
-                                <span b-86zuwu24vm="" class="bar"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </nav>
-
     </header>
     <div class="container">
         <main role="main" class="pb-3">

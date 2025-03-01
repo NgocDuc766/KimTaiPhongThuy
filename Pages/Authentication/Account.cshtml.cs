@@ -41,39 +41,6 @@ namespace KimTaiPhongThuy.Pages.Authentication
             IsSignUp = mode == "register";
         }
 
-        //public IActionResult OnPostLogin()
-        //{
-        //    var user = _authDao.GetUserByUsername(UserName);
-        //    if (user == null)
-        //    {
-        //        ErrorMessage = "Invalid credentials.";
-        //        return Page();
-        //    }
-
-        //    // So sánh mật khẩu đã mã hóa với mật khẩu người dùng nhập vào
-        //    var result = _passwordHasher.VerifyHashedPassword(user, user.PassWord, Password);
-        //    if (result == PasswordVerificationResult.Failed)
-        //    {
-        //        ErrorMessage = "Invalid credentials.";
-        //        return Page();
-        //    }
-
-        //    // Nếu mật khẩu chính xác, tạo cookies và chuyển hướng
-        //    var cookieOptions = new CookieOptions
-        //    {
-        //        HttpOnly = true,
-        //        IsEssential = true,
-        //        Secure = true,  // Đảm bảo hoạt động trên HTTPS
-        //        SameSite = SameSiteMode.Strict // Chặn cookie gửi từ trang khác
-        //    };
-
-        //    // Lưu cookie trong session (mất khi tắt trình duyệt)
-        //    Response.Cookies.Append("UserId", user.UserId.ToString(), cookieOptions);
-        //    Response.Cookies.Append("UserRole", user.RoleId.ToString(), cookieOptions);
-
-        //    return user.RoleId == 1 ? RedirectToPage("/Admin/Dashboard") : RedirectToPage("/Index");
-        //}
-
         public IActionResult OnPostLogin()
         {
             var user = _authDao.GetUserByUsername(UserName);
@@ -100,30 +67,12 @@ namespace KimTaiPhongThuy.Pages.Authentication
                 SameSite = SameSiteMode.Strict // Chặn cookie gửi từ trang khác
             };
 
-            // Lưu thông tin người dùng vào session (hoặc cookie)
-            HttpContext.Session.SetString("UserName", user.UserName); // Lưu tên người dùng vào session
+            // Lưu cookie trong session (mất khi tắt trình duyệt)
             Response.Cookies.Append("UserId", user.UserId.ToString(), cookieOptions);
             Response.Cookies.Append("UserRole", user.RoleId.ToString(), cookieOptions);
 
-            // Chuyển hướng theo vai trò của người dùng
             return user.RoleId == 1 ? RedirectToPage("/Admin/Dashboard") : RedirectToPage("/Index");
         }
-
-
-        public IActionResult OnPostLogout()
-        {
-            // Xóa session
-            HttpContext.Session.Clear();
-
-            // Xóa cookies (nếu có)
-            Response.Cookies.Delete("UserId");
-            Response.Cookies.Delete("UserRole");
-
-            // Chuyển hướng về trang đăng nhập
-            return RedirectToPage("/Authentication/Account");
-        }
-
-
 
 
 
