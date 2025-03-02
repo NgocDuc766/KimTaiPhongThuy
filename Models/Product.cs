@@ -19,7 +19,7 @@ namespace KimTaiPhongThuy.Models
         public string Color { get; set; } = null!;
         public decimal Price { get; set; }
         public string? ImageUrl { get; set; }
-        public int? Weight { get; set; }
+        public decimal? Weight { get; set; }
         public string? FengShuiElement { get; set; }
         public int CreatedBy { get; set; }
         public DateTime? CreatedAt { get; set; }
