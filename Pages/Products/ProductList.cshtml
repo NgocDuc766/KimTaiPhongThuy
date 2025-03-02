@@ -1,210 +1,110 @@
 ﻿@page
 @model KimTaiPhongThuy.Pages.Products.ProductListModel
 @{
+    ViewData["Title"] = "Danh sách sản phẩm";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
     <link rel="stylesheet" type="text/css" href="~/css/ProductList/bootstrap.min.css">
     <!-- style css -->
     <link rel="stylesheet" type="text/css" href="~/css/ProductList/style.css">
     <!-- Responsive-->
-    <link rel="stylesheet" href="~/css/ProductList/responsive.css">
     <!-- fevicon -->
-    <link rel="icon" href="images/fevicon.png" type="image/gif" />
-    <!-- Scrollbar Custom CSS -->
-    <link rel="stylesheet" href="~/css/ProductList/jquery.mCustomScrollbar.min.css">
+    @* <link rel="icon" href="images/fevicon.png" type="image/gif" /> *@
     <!-- Tweaks for older IEs-->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
     <!-- font awesome -->
-    @* <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> *@
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--  -->
     <!-- owl stylesheets -->
-    @* <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext" rel="stylesheet"> *@
+    @* <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext" rel="stylesheet"> 
     <link rel="stylesheet" href="css/owl.carousel.min.css">
     <link rel="stylesoeet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
-    <!-- banner bg main start -->
-    <div class="banner_bg_main">
-        <!-- logo section end -->
-        <!-- header section start -->
-        <div class="header_section">
-            <div class="container">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen"> *@
+
+    <div class="container mt-5">
                 <div class="containt_main">
                     <div class="dropdown">
+                    <form method="get" class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            All Category
+                            @if (Model.SelectedCategoryId.HasValue)
+                            {
+                                @Model.Categories.FirstOrDefault(c => c.CategoryId == Model.SelectedCategoryId.Value)?.CategoryName;
+                            }
+                            else
+                            {
+                                <span>Tất cả danh mục</span>
+                            }
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="?">Tất cả danh mục</a> <!-- Lọc tất cả -->
+                            @foreach (var cate in Model.Categories)
+                            {
+                                <a class="dropdown-item" href="?categoryId=@cate.CategoryId">@cate.CategoryName</a>
+                            }
                         </div>
+                    </form>
                     </div>
                     <div class="main">
                         <!-- Another variation with a button -->
+                        <form method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
+                            <input type="text" name="querySearch" class="form-control" placeholder="Tìm trang sức theo tên...">
                             <div class="input-group-append">
-                            <button class="btn btn-secondary" type="button" style="background-color: #8C0000; border-color:#8C0000 ">
+                                <button class="btn btn-secondary" type="button" style="background-color: #8C0000; border-color:#8C0000 ">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="header_box">
-                        <div class="login_menu">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                        <span class="padding_10">Cart</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-user" aria-hidden="true"></i>
-                                        <span class="padding_10">Cart</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- banner bg main end -->
     <!-- jewellery  section start -->
-    <div class="jewellery_section mt-4">
-        <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="container">
-                        <h1 class="fashion_taital">Sản phẩm phong thủy</h1>
-                        <div class="fashion_section_2">
-                            <div class="row">
-                               @*  <div class="col-lg-4 col-sm-4">
-                                    <div class="box_main">
-                                        <h4 class="shirt_text">Jumkas</h4>
-                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
-                                        <div class="jewellery_img"><img src="~/images/SP5.png></div>
-                                        <div class="btn_main">
-                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                            <div class="seemore_bt"><a href="#">See More</a></div>
-                                        </div>
-                                    </div>
-                                </div> *@
-                                <div class="col-lg-4 col-sm-4">
-                                    <div class="box_main">
-                                    <h4 class="shirt_text">Vòng ngọc mã não</h4>
-                                        <p class="price_text">Giá Bán  <span style="color: #262626;">1.400.000VNĐ</span></p>
-                                        <div class="jewellery_img"><img src="~/images/SP2.2.png"></div>
-                                        <div class="btn_main">
-                                            <div class="buy_bt"><a href="#">Mua Ngay</a></div>
-                                            <div class="seemore_bt"><a href="#">Xem Thêm</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-4">
-                                    <div class="box_main">
-                                    <h4 class="shirt_text">Vòng ngọc Myanmar</h4>
-                                        <p class="price_text">Giá bán  <span style="color: #262626;">1.500.000VNĐ</span></p>
-                                        <div class="jewellery_img"><img src="~/images/SP4.png"></div>
-                                        <div class="btn_main">
-                                            <div class="buy_bt"><a href="#">Mua Ngay</a></div>
-                                            <div class="seemore_bt"><a href="#">Xem Thêm</a></div>
-                                        </div>
-                                    </div>
-                                </div>
+<div class="jewellery_section mt-4">
+    <div class="container">
+        <h1 class="fashion_taital">Sản phẩm phong thủy</h1>
+        <div class="fashion_section_2">
+            <div class="row">
+               @foreach(var product in Model.Products){
+                    <div class="col-lg-4 col-sm-4 mb-4">
+                        <div class="box_main">
+                            <div class="jewellery_img"><img src="@product.ImageUrl"></div>
+                            <h4 class="shirt_text">@product.ProductName</h4>
+                            <p class="price_text">Giá Bán <span style="color: #262626;">@product.Price.ToString("N0") VNĐ</span></p>
+                            <div class="btn_main mt-3">
+                                <div class="buy_bt"><a href="#">Mua Ngay</a></div>
+                                <div class="seemore_bt"><a href="/Products/ProductDetail?id=@product.ProductId">Xem Thêm</a></div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container">
-                        <h1 class="fashion_taital">Jewellery Accessories</h1>
-                        <div class="fashion_section_2">
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4">
-                                    <div class="box_main">
-                                        <h4 class="shirt_text">Jumkas</h4>
-                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
-                                        <div class="jewellery_img"><img src="images/jhumka-img.png"></div>
-                                        <div class="btn_main">
-                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                            <div class="seemore_bt"><a href="#">See More</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-4">
-                                    <div class="box_main">
-                                        <h4 class="shirt_text">Necklaces</h4>
-                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
-                                        <div class="jewellery_img"><img src="images/neklesh-img.png"></div>
-                                        <div class="btn_main">
-                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                            <div class="seemore_bt"><a href="#">See More</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-4">
-                                    <div class="box_main">
-                                        <h4 class="shirt_text">Kangans</h4>
-                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
-                                        <div class="jewellery_img"><img src="images/kangan-img.png"></div>
-                                        <div class="btn_main">
-                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                            <div class="seemore_bt"><a href="#">See More</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container">
-                        <h1 class="fashion_taital">Jewellery Accessories</h1>
-                        <div class="fashion_section_2">
-                            <div class="row">
-                                <div class="col-lg-4 col-sm-4">
-                                    <div class="box_main">
-                                        <h4 class="shirt_text">Jumkas</h4>
-                                        <p class="price_text">Start Price  <span style="color: #262626;">$ 100</span></p>
-                                        <div class="jewellery_img"><img src="images/jhumka-img.png"></div>
-                                        <div class="btn_main">
-                                            <div class="buy_bt"><a href="#">Buy Now</a></div>
-                                            <div class="seemore_bt"><a href="#">See More</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-4">
-                                    <div class="box_main">
-                                        <h4 class="shirt_text">Necklaces</h4>
-                                        <p class="price_text">Giá bán  <span style="color: #262626;">$ 100</span></p>
-                                        <div class="jewellery_img"><img src="images/neklesh-img.png"></div>
-                                        <div class="btn_main">
-                                            <div class="buy_bt"><a href="#">Mua Ngay</a></div>
-                                            <div class="seemore_bt"><a href="#">Xem Thêm</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-sm-4">
-                                    <div class="box_main">
-                                        <h4 class="shirt_text">Kangans</h4>
-                                        <p class="price_text">Giá bán  <span style="color: #262626;">$ 100</span></p>
-                                        <div class="jewellery_img"><img src="images/kangan-img.png"></div>
-                                        <div class="btn_main">
-                                            <div class="buy_bt"><a href="#">Mua Ngay</a></div>
-                                            <div class="seemore_bt"><a href="#">Xem Thêm</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               }
+                
             </div>
+
+            <!-- Pagination -->
+@*             <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                        <a class="page-link" href="?page=@(Model.CurrentPage - 1)" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    @for (int i = 1; i <= Model.TotalPages; i++)
+                    {
+                        <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                            <a class="page-link" href="?page=@i">@i</a>
+                        </li>
+                    }
+                    <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                        <a class="page-link" href="?page=@(Model.CurrentPage + 1)" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav> *@
         </div>
     </div>
+</div>
     <!-- jewellery  section end -->
     <!-- Javascript files-->
     <script src="~/js/ProductList/jquery.min.js"></script>

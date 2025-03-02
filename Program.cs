@@ -37,6 +37,7 @@ namespace KimTaiPhongThuy
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddScoped<AuthenticationDAO>();
+            builder.Services.AddScoped<ProductDAO>();
 
 
             var app = builder.Build();
