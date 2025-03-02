@@ -1,0 +1,223 @@
+﻿@page
+@model KimTaiPhongThuy.Pages.Products.ProductDetailModel
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+}
+
+<!-- content -->
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+<!-- Google Fonts Roboto -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
+<!-- MDB -->
+<link rel="stylesheet" href="~/css/mdb.min.css" />
+<link rel="stylesheet" href="~/css/ProductList/bootstrap.min.css" />
+<!-- Custom styles -->
+<link rel="stylesheet" href="~/css/ProductDetail/style.css"/>
+<style>
+    .btn-yellow {
+        background-color: #ffc107 !important;
+        color: #000 !important;
+        border-color: #ffc107 !important;
+    }
+
+        .btn-yellow:hover {
+            background-color: #ffca2c !important;
+            color: #000 !important;
+        }
+</style>
+
+
+<section class="py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <aside class="col-lg-6">
+                <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                    <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="@Model.Product.ImageUrl">
+                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="@Model.Product.ImageUrl" alt="@Model.Product.ProductName" />
+                    </a>
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <!-- Thêm các ảnh phụ nếu có (tạm thời dùng ảnh mẫu) -->
+                    <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="@Model.Product.ImageUrl">
+                        <img width="60" height="60" class="rounded-2" src="@Model.Product.ImageUrl" alt="@Model.Product.ProductName" />
+                    </a>
+                    <!-- Có thể mở rộng thêm ảnh phụ từ database nếu có -->
+                </div>
+            </aside>
+            <main class="col-lg-6">
+                <div class="ps-lg-3">
+                    <h4 class="title text-dark">
+                        @Model.Product.ProductName
+                    </h4>
+                    <div class="d-flex flex-row my-3">
+                        <div class="text-warning mb-1 me-2">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="ms-1">
+                                4.5
+                            </span>
+                        </div>
+                        <span class="text-success ms-2">In stock</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <span class="h5">@Model.Product.Price.ToString("N0") VNĐ</span>
+                    </div>
+
+@*                     <p>
+                        @Model.Product.Description
+                    </p> *@
+
+                    <div class="row">
+                        <dt class="col-4">Chất liệu:</dt>
+                        <dd class="col-8">@Model.Product.Material</dd>
+
+                        <dt class="col-4">Màu sắc:</dt>
+                        <dd class="col-8">@Model.Product.Color</dd>
+
+                        <dt class="col-4">Trọng lượng:</dt>
+                        <dd class="col-8">@Model.Product.Weight g</dd>
+
+                        <dt class="col-4">Phù hợp mệnh:</dt>
+                        <dd class="col-8">@Model.Product.FengShuiElement</dd>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-4">
+                        <div class="col-md-4 col-6">
+                            <label class="mb-2">Kích thước</label>
+                            <select class="form-select border border-secondary" style="height: 35px;">
+                                <option>Nhỏ</option>
+                                <option>Trung</option>
+                                <option>Lớn</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 col-6 mb-3">
+                            <label class="mb-2 d-block">Số lượng</label>
+                            <div class="input-group quantity-group mb-3" style="width: 150px;">
+                                <button class="btn btn-white border border-secondary quantity-btn" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <input type="text" class="form-control text-center border border-secondary quantity-input" value="1" aria-label="Số lượng" aria-describedby="button-addon1" />
+                                <button class="btn btn-white border border-secondary quantity-btn" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <a href="#" class="btn btn-yellow shadow-0">Mua ngay</a>
+                    <a href="#" class="btn btn-yellow shadow-0"> <i class="me-1 fa fa-shopping-basket"></i> Thêm vào giỏ</a>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+
+<!-- Product Description Section -->
+<section class="py-5">
+    <div class="container">
+        <h4 class="text-dark mb-4">Thông tin sản phẩm</h4>
+        <div class="border rounded-2 px-3 py-2 bg-white">
+            @foreach (var sect in Model.DescriptionSections)
+            {
+                <h5 class="text-dark mt-3">@sect.Key</h5>
+                <p>@Html.Raw(sect.Value.Replace("\n", "<br />"))</p>
+@*                 if (sect.Key == "Đặc Điểm Nổi Bật" || sect.Key == "Công Dụng & Ý Nghĩa Phong Thủy" || sect.Key == "Cam kết sản phẩm")
+                {
+                    <ul class="list-unstyled">
+                        @foreach (var item in sect.Value.Split(new[] { "✔" }, StringSplitOptions.RemoveEmptyEntries)
+                            .Where(x => !string.IsNullOrWhiteSpace(x)))
+                        {
+                            <li><i class="fas fa-check text-success me-2"></i>@item.Trim()</li>
+                        }
+                    </ul>
+                } *@
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Reviews Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h4 class="text-dark mb-4">Đánh giá sản phẩm</h4>
+        <div class="border rounded-2 px-3 py-2 bg-white">
+            @if (Model.Reviews != null && Model.Reviews.Any())
+            {
+                foreach (var review in Model.Reviews)
+                {
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="mb-0">@review.UserId</h6>
+                            <small class="text-muted">@review.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</small>
+                        </div>
+                        <div class="text-warning mb-1">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= review.Rating)
+                                {
+                                    <i class="fa fa-star"></i>
+                                }
+                                else if (i == Math.Ceiling(review.Rating) && review.Rating % 1 != 0)
+                                {
+                                    <i class="fas fa-star-half-alt"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star-o"></i>
+                                }
+                            }
+                        </div>
+                        <p class="mb-0">@review.Description</p>
+                        <hr />
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Chưa có đánh giá nào cho sản phẩm này.</p>
+            }
+            <!-- Form to add review (optional) -->
+            <div class="mt-4">
+                <h6>Thêm đánh giá của bạn</h6>
+                <form method="post">
+                    <div class="mb-3">
+                        <label class="form-label">Đánh giá của bạn (1-5)</label>
+                        <input type="number" class="form-control" name="Rating" min="1" max="5" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bình luận</label>
+                        <textarea class="form-control" name="Comment" rows="3" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-yellow">Gửi đánh giá</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const minusBtn = document.getElementById('button-addon1');
+        const plusBtn = document.getElementById('button-addon2');
+        const quantityInput = document.querySelector('.quantity-group .form-control');
+
+        minusBtn.addEventListener('click', function () {
+            let value = parseInt(quantityInput.value);
+            if (value > 1) {
+                quantityInput.value = value - 1;
+            }
+        });
+
+        plusBtn.addEventListener('click', function () {
+            let value = parseInt(quantityInput.value);
+            quantityInput.value = value + 1;
+        });
+    });
+</script>
