@@ -13,7 +13,7 @@ namespace KimTaiPhongThuy
             var builder = WebApplication.CreateBuilder(args);
 
             // Đọc chuỗi kết nối từ appsettings.json
-            var connectionString = builder.Configuration.GetConnectionString("MyDB");
+            var connectionString = builder.Configuration.GetConnectionString("MyCnn");
 
             // Thêm DbContext vào DI container
             builder.Services.AddDbContext<JewelryStoreContext>(options =>

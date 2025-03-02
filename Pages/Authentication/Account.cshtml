@@ -10,18 +10,20 @@
 <div class="cont @(Model.IsSignUp ? "s--signup" : "")">
     <!-- Đăng nhập -->
     <div class="form sign-in">
-        <h2>Welcome</h2>
+        <h2>Xin chào</h2>
         <form method="post">
             <label>
-                <span>UserName</span>
+                <span>Tên đăng nhập</span>
                 <input type="text" asp-for="UserName" required />
             </label>
             <label>
-                <span>Password</span>
+                <span>Mật khẩu1</span>
                 <input type="password" asp-for="Password" required />
             </label>
-            <p class="forgot-pass">Forgot password?</p>
-            <button type="submit" asp-page-handler="Login" class="submit">Sign In</button>
+            <p class="forgot-pass">Quên mật khẩu?</p>
+            <button type="submit" asp-page-handler="Login" class="submit" style="background-color: darkred;">
+                Đăng nhập
+            </button>
         </form>
         @if (!string.IsNullOrEmpty(Model.ErrorMessage))
         {
@@ -32,23 +34,23 @@
     <div class="sub-cont">
         <div class="img">
             <div class="img__text m--up">
-                <h3>Don't have an account? Please Sign up!</h3>
+                <h3>Chưa có tài khoản? Hãy đăng kí!</h3>
             </div>
             <div class="img__text m--in">
-                <h3>If you already have an account, just sign in.</h3>
+                <h3>Nếu bạn đã có tài khoản, Hãy đăng nhập!</h3>
             </div>
             <div class="img__btn">
-                <span class="m--up">Sign Up</span>
-                <span class="m--in">Sign In</span>
+                <span class="m--up">Đăng ký</span>
+                <span class="m--in">Đăng nhập</span>
             </div>
         </div>
 
         <!-- Đăng ký -->
         <div class="form sign-up">
-            <h2>Create your Account</h2>
+            <h2>Đăng ký tài khoản</h2>
             <form method="post">
                 <label>
-                    <span>Name</span>
+                    <span>Tên người dùng</span>
                     <input type="text" asp-for="User.UserName" required />
                 </label>
                 <label>
@@ -56,11 +58,11 @@
                     <input type="email" asp-for="User.Email" required />
                 </label>
                 <label>
-                    <span>Password</span>
+                    <span>Mật khẩu</span>
                     <input type="password" asp-for="User.PassWord" required />
                 </label>
                 
-                <button type="submit" asp-page-handler="Register" class="submit">Sign Up</button>
+                <button type="submit" asp-page-handler="Register" class="submit" style="background-color: darkred;">Đăng ký</button>
             </form>
             @if (!string.IsNullOrEmpty(Model.Message))
             {
