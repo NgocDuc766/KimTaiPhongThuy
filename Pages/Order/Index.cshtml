@@ -56,11 +56,10 @@
         }
     </tbody>
 </table>
-
-<h3>Tổng tiền: @Model.TotalAmount.ToString("N0") VNĐ</h3>
-
-<form method="post" asp-page="Checkout">
-    <button type="submit" class="btn btn-success" style="background-color: #009fdd;">
+@if (Model.Cart.Count > 0)
+{
+    <h3>Tổng tiền: @Model.TotalAmount.ToString("N0") VNĐ</h3>
+    <a href="Order/Payment" class="btn btn-success" style="background-color: #009fdd;">
         Thanh toán
-    </button>
-</form>
+    </a>
+}

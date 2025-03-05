@@ -1,0 +1,18 @@
+﻿@page
+@model KimTaiPhongThuy.Pages.Order.CheckOutModel
+@{
+    ViewData["Title"] = "Đặt hàng thành công";
+}
+
+<div class="text-center mt-5">
+    <img src="/images/success-icon.png" alt="Đặt hàng thành công" width="100">
+    <h3 class="mt-3">Đặt hàng thành công</h3>
+    <p>Sản phẩm sẽ được giao tới quý khách trong 2-3 ngày tới</p>
+    <p>Sẽ chuyển về trang chủ sau 3 giây</p>
+</div>
+
+<script>
+    setTimeout(function() {
+        window.location.href = "/Index";
+    }, 3000); // 3 giây chuyển về trang chủ
+</script>

@@ -1,4 +1,94 @@
 ﻿@page
 @model KimTaiPhongThuy.Pages.Order.PaymentModel
 @{
+    ViewData["Title"] = "Thanh Toán";
 }
+<div class="container mt-5">
+    <h2 class="text-center">Thông tin đặt hàng</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Ảnh @Model.UsersId</th>
+                <th>Tên sản phẩm @Model.UsesId</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Tổng</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Cart)
+            {
+                <tr>
+                    <td><img src="@item.ImageUrl" alt="@item.ProductName" style="width: 50px;" /></td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price.ToString("N0") VNĐ</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.TotalPrice.ToString("N0") VNĐ</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <h2 class="mt-4 text-center">Thông tin khách hàng</h2>
+    <form method="post" class="card p-4 needs-validation" id="orderForm" novalidate>
+        <div class="mb-3">
+            <label class="form-label">Họ Tên<strong style="color: red;">*</strong></label>
+            <input type="text" class="form-control" id="fullName" required>
+            <div class="invalid-feedback">Vui lòng nhập họ tên.</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Số điện thoại<strong style="color: red;">*</strong></label>
+            <input type="text" class="form-control" id="phoneNumber" required pattern="\d{10}">
+            <div class="invalid-feedback">Vui lòng nhập số điện thoại hợp lệ (10 số).</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email<strong style="color: red;">*</strong></label>
+            <input type="email" class="form-control" id="email" required>
+            <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Tỉnh/Thành<strong style="color: red;">*</strong></label>
+                <input type="text" class="form-control" id="province" required>
+                <div class="invalid-feedback">Vui lòng nhập tỉnh/thành.</div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Quận/Huyện<strong style="color: red;">*</strong></label>
+                <input type="text" class="form-control" id="district" required>
+                <div class="invalid-feedback">Vui lòng nhập quận/huyện.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Địa chỉ chi tiết <strong style="color: red;">*</strong></label>
+                <input type="text" class="form-control" id="address" required>
+                <div class="invalid-feedback">Vui lòng nhập địa chỉ chi tiết.</div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phương thức thanh toán</label>
+            <input type="text" class="form-control" value="Thanh toán tiền mặt khi nhận hàng (COD)" disabled>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ghi chú</label>
+            <textarea class="form-control" id="note"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100" id="submitButton">ĐẶT HÀNG</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById("orderForm").addEventListener("submit", function (event) {
+        let form = this;
+
+        // Kiểm tra tính hợp lệ của form
+        if (!form.checkValidity()) {
+            event.preventDefault();  // Ngăn chặn gửi form
+            event.stopPropagation(); // Ngăn chặn các sự kiện khác
+        }
+
+        // Thêm class để hiển thị lỗi
+        form.classList.add("was-validated");
+    });
+</script>
