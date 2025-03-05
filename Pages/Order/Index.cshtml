@@ -2,65 +2,64 @@
 @model KimTaiPhongThuy.Pages.Order.IndexModel
 @{
 }
-<div class="container">
-    <h2 class="text-center">Giỏ hàng</h2>
-    <div class="cart-item d-flex align-items-center mb-3">
-        <img src="~/images/WEB/SP2.2.png" alt="Name" class="cart-item-image" />
-        <div class="cart-item-details">
-            <h5>Vòng ngọc trắng phong thủy</h5>
-            <p>Mã sản phẩm: NB1003</p>
-            <p>SL: 1</p>
-            <p>Giá: 10.000.000 VND</p>
-        </div>
-    </div>
-    <div class="cart-item d-flex align-items-center mb-3">
-        <img src="~/images/WEB/SP4.png" alt="Name" class="cart-item-image" />
-        <div class="cart-item-details">
-            <h5>Vòng ngọc xanh phong thủy</h5>
-            <p>Mã sản phẩm: NX1003</p>
-            <p>SL: 1</p>
-            <p>Giá: 10.000.000 VND</p>
-        </div>
-    </div>
+<h2>Giỏ hàng</h2>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ảnh</th>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Tổng</th>
+            <th>Hàng động</th>
+            <th>Xóa</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Cart.Count == 0)
+        {
+                <tr>
+                    <td colspan="6">Không có sản phẩm nào trong giỏ hàng</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var item in Model.Cart)
+            {
+                <tr>
+                    <td><img src="@item.ImageUrl" alt="@item.ProductName" style="width: 50px;" /></td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price.ToString("N0") VNĐ</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.TotalPrice.ToString("N0") VNĐ</td>
+                    <td>
+                        <form method="post" style="display: inline;">
+                            <input type="hidden" name="productId" value="@item.ProductID" />
+                            <button type="submit" asp-page-handler="DecreaseQuantity" class="btn btn-secondary">-</button>
+                        </form>
+                        @item.Quantity
+                        <form method="post" style="display: inline;">
+                            <input type="hidden" name="productId" value="@item.ProductID" />
+                            <button type="submit" asp-page-handler="IncreaseQuantity" class="btn btn-secondary">+</button>
+                        </form>
+                    </td>
 
-    <div class="cart-summary">
-        <p>Tạm tính: <span class="float-end">@Model.Subtotal.ToString("N0") VND</span></p>
-        <p>Giảm giá: <span class="float-end">@Model.Discount.ToString("N0") VND</span></p>
-        <p><strong>Tổng: <span class="float-end">@Model.Total.ToString("N0") VND</span></strong></p>
-    </div>
-
-    <div class="text-center mt-4">
-        <button class="btn btn-secondary btn-lg">Tiếp tục</button>
-    </div>
-</div>
-
-<style>
-    .cart-item {
-        display: flex;
-        gap: 15px;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-    }
-
-    .cart-item-image {
-        width: 15%;
-        height: 189px;
-        object-fit: cover;
-    }
-
-    .cart-item-details {
-        flex-grow: 1;
-    }
-
-    .cart-summary {
-        margin-top: 20px;
-        font-size: 16px;
-    }
-
-    .btn-secondary {
-        background-color: #ccc;
-        color: black;
-        font-weight: bold;
-    }
-</style>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="productId" value="@item.ProductID" />
+                            <button type="submit" asp-page-handler="RemoveFromCart" class="btn btn-danger">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+@if (Model.Cart.Count > 0)
+{
+    <h3>Tổng tiền: @Model.TotalAmount.ToString("N0") VNĐ</h3>
+    <a href="Order/Payment" class="btn btn-success" style="background-color: #009fdd;">
+        Thanh toán
+    </a>
+}

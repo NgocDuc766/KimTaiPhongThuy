@@ -102,6 +102,7 @@ namespace KimTaiPhongThuy.Pages.Authentication
 
             // Lưu thông tin người dùng vào session (hoặc cookie)
             HttpContext.Session.SetString("UserName", user.UserName); // Lưu tên người dùng vào session
+            HttpContext.Session.SetInt32("UserId", user.UserId); // Lưu ID người dùng vào session
             Response.Cookies.Append("UserId", user.UserId.ToString(), cookieOptions);
             Response.Cookies.Append("UserRole", user.RoleId.ToString(), cookieOptions);
 

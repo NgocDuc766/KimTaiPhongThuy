@@ -72,16 +72,15 @@
                             <h4 class="shirt_text">@product.ProductName</h4>
                             <p class="price_text">Giá Bán <span style="color: #262626;">@product.Price.ToString("N0") VNĐ</span></p>
                             <div class="btn_main mt-3">
-                                @if (HttpContext.Session.GetString("UserName") != null)
-                                {
-                                    <div class="buy_bt"><a href="#">Mua Ngay</a></div>
-
-                                }
-                                else
-                                {
-                                    <div class="buy_bt"><a href="/Authentication/Account">Mua Ngay</a></div>
-
-                                }
+                                <div class="buy_bt">
+                                    <form method="post" asp-page="./ProductList">
+                                        <input type="hidden" name="productId" value="@product.ProductId" />
+                                        <input type="hidden" name="productName" value="@product.ProductName" />
+                                        <input type="hidden" name="price" value="@product.Price" />
+                                        <input type="hidden" name="imageUrl" value="@product.ImageUrl" />
+                                        <button type="submit" asp-page-handler="AddToCart" class="btn btn-primary">Thêm vào giỏ hàng</button>
+                                    </form>
+                                </div>
                                 <div class="seemore_bt"><a href="/Products/ProductDetail?id=@product.ProductId">Xem Thêm</a></div>
                             </div>
                         </div>
