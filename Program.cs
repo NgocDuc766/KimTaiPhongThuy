@@ -23,10 +23,22 @@ namespace KimTaiPhongThuy
             builder.Services.AddSingleton<IPasswordHasher<User>, PasswordHasher<User>>(); // Thêm dòng này
             builder.Services.AddSingleton<PasswordHasherService>(); // Đăng ký
             builder.Services.AddSingleton<EmailService>();
+
+            // Đăng ký dịch vụ session vào DI container
+            builder.Services.AddDistributedMemoryCache(); // Sử dụng bộ nhớ cho cache
+            builder.Services.AddSession(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Thời gian hết hạn của session
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always; // Sử dụng cookie chỉ trên HTTPS
+            });
+
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddScoped<AuthenticationDAO>();
-            
+            builder.Services.AddScoped<ProductDAO>();
+
 
             var app = builder.Build();
 
@@ -40,6 +52,7 @@ namespace KimTaiPhongThuy
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 

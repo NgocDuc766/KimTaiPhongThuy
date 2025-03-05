@@ -179,7 +179,7 @@ h5,
 .h5,
 h6,
 .h6 {
-  font-family: var(--heading-font);
+  font-family: Arial;
   font-weight: var(--heading-font-weight);
   color: var(--heading-color);
   line-height: var(--heading-line-height);
@@ -343,7 +343,7 @@ html {
   box-sizing: border-box;
 }
 body {
-  font-family: var(--body-font);
+  font-family: Arial;
   font-size: 18px;
   font-weight: 300;
   line-height: 2;
@@ -419,7 +419,7 @@ img {
   vertical-align: middle;
 }
 ::selection {
-  background: var(--primary-color);
+  background: red;
   color: var(--light-color);
   text-shadow: none;
 }
@@ -940,8 +940,8 @@ fieldset[disabled] a.btn {
   color: var(--light-color);
 }
 .btn.btn-primary {
-  background: var(--primary-color);
-  color: var(--light-color);
+    background: #000000;
+    color: var(--light-color);
 }
 .btn.btn-primary:hover {
   background-color: var(--dark-color);
@@ -1002,7 +1002,7 @@ h2.section-title:after {
     left: 0;
     right: 0;
     top: 0;
-    border-bottom: 1px solid var(--primary-color);
+    border-bottom: 1px solid red;
     margin: 0 auto;
 }
 h4.subtitle {
@@ -1855,7 +1855,7 @@ h1.banner-title {
 }
 .feat-collection span.price-tag {
     font-size: 1.6em;
-    color: var(--primary-color);
+    color: red;
 }
 
 /* 7.7 Special Ornaments Section

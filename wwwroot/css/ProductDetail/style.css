@@ -1,0 +1,36 @@
+.quantity-group {
+    width: 150px;
+}
+
+.quantity-input {
+    height: 38px !important;
+    font-size: 14px;
+    padding: 0;
+    text-align: center;
+    width: 50px !important;
+}
+
+.quantity-btn {
+    height: 38px !important;
+    width: 38px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 14px !important;
+}
+
+.quantity-group .input-group-text {
+    padding: 0 !important;
+}
+
+.btn-yellow {
+    background-color: #ffc107 !important;
+    color: #000 !important;
+    border-color: #ffc107 !important;
+}
+
+    .btn-yellow:hover {
+        background-color: #ffca2c !important;
+        color: #000 !important;
+    }

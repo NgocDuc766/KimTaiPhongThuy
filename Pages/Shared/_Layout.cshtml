@@ -4,17 +4,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KimTaiPhongThuy</title>
+    <title>@ViewData["Title"] - Kim Tài Phong Thủy</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- font awesome -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/KimTaiPhongThuy.styles.css" asp-append-version="true" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="author" content="TemplatesJungle">
-    <meta name="keywords" content="Free HTML CSS Template, gemstone website template, jewellery website template, ecommerce">
-    <meta name="description" content="Free HTML CSS Template by TemplatesJungle.com">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="fonts/icomoon.css">
@@ -25,85 +25,189 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Poiret+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav class="secondary-nav border-top border-bottom">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="top-menu d-flex flex-wrap justify-content-between">
-                        <div class="left-block d-flex flex-wrap list-unstyled justify-content-start">
-                            @* search bar nằm bên trái header*@
-                            <li class="menu-item">
+    <header   style="
+    background-color: darkred;
+">
+        <nav   class="secondary-nav border-top border-bottom">
+            <div   class="">
+                <div   class="row">
+                    <div   class="top-menu d-flex flex-wrap justify-content-between">
+                        <div   class="left-block d-flex flex-wrap list-unstyled justify-content-start">
+                            <li   class="menu-item">
                                 <form class="searchbar">
-                                    <input type="text" name="search" placeholder="Search Here..">
-                                    <i class="icon icon-search"></i>
+                                    <input   type="text" name="search" placeholder="Search Here..">
+                                    <i   class="icon icon-search"></i>
                                 </form>
                             </li>
                         </div>
-                        <div class="right-block d-flex flex-wrap justify-content-center">
-                            <div class="main-logo">
-                                <a href="index.html">
-                                    <img src="images/logo-kimtaiphongthuy.png" alt="logo" style="height:70px; width:300px">
+                        <div   class="right-block d-flex flex-wrap justify-content-center">
+                            <div   class="main-logo">
+                                <a   href="index">
+                                    <img src="~/images/WEB/main-logo.png" alt="logo" style="height:40px; width:100%">
                                 </a>
                             </div>
                         </div>
-                            @*menu bên phải header: login/logout....*@
-                        <ul class="right-block d-flex flex-wrap list-unstyled justify-content-end">                            <li class="menu-item">
+                        <ul class="right-block d-flex flex-wrap list-unstyled justify-content-end">
+                            @if (Context.Session.GetString("ErrorMessage") != null)
+                            {
+                                <div class="alert alert-warning" style="position: absolute; top: 20px; right: 20px; z-index: 999;">
+                                    @Context.Session.GetString("ErrorMessage")
+                                </div>
+                                @* Sau khi hiển thị thông báo, xóa thông báo khỏi session *@
+                                Context.Session.Remove("ErrorMessage");
+                            }
+
                             <li class="menu-item">
-                                <a href="/Authentication/Account">
-                                    <i class="icon icon-user"></i>Login
-                                </a>
+                                @if (Context.Session.GetString("UserName") != null)
+                                {
+                                    <a href="Authentication/Profile" style="color: yellow;">
+                                        <i class="icon icon-user"></i>@Context.Session.GetString("UserName")
+                                    </a>
+                                    @* <!-- Nút Logout -->
+                                <form method="post" asp-page-handler="Logout" style="display:inline;">
+                                <button type="submit" name="logout" value="true" style="background: none; border: none; color: yellow; cursor: pointer;">
+                                <i class="icon icon-logout"></i> Logout
+                                </button>
+                                </form> *@
+                                }
+                                else
+                                {
+                                    <a href="/Authentication/Account" style="color: yellow;">
+                                        <i class="icon icon-user"></i>Đăng nhập
+                                    </a>
+                                }
                             </li>
                         </ul>
+
+
 
                     </div>
                 </div>
             </div>
         </nav>
-        <nav class="secondary-nav">
-            <div class="container-fluid">
-                <div class="row d-flex flex-wrap justify-content-center">
-                    <div class="col-md-8 col-sm-10">
-                        <div class="navbar d-flex">
-                            <div class="main-menu stellarnav desktop light">
-                                <ul class="menu-list list-unstyled">
-                                    <li class="menu-item">
-                                        <a href="/index" class="text-uppercase item-anchor">Trang chủ</a>
+        @* <nav b-86zuwu24vm="" class="secondary-nav">
+        <div b-86zuwu24vm="" class="">
+        <div b-86zuwu24vm="" class="row d-flex flex-wrap justify-content-center">
+        <div b-86zuwu24vm="" class="col-md-8 col-sm-10">
+        <div b-86zuwu24vm="" class="navbar d-flex">
+        <div b-86zuwu24vm="" class="main-menu stellarnav desktop light">
+        <ul b-86zuwu24vm="" class="menu-list list-unstyled">
+        <li b-86zuwu24vm="" class="menu-item">
+        <a b-86zuwu24vm="" href="/index" class="text-uppercase item-anchor" style="
+        color: yellow;
+        ">Trang chủ</a>
+        </li>
+        <li b-86zuwu24vm="" class="menu-item">
+        <a b-86zuwu24vm="" href="/chat" class="text-uppercase item-anchor" style="
+        color: yellow;
+        ">Tư vấn nhanh</a>
+        </li>
+        <li b-86zuwu24vm="" class="menu-item">
+        <a b-86zuwu24vm="" href="/Products/ProductList" class="text-uppercase item-anchor" style="
+        color: yellow;
+        ">Sản phẩm</a>
+        </li>
+        <li b-86zuwu24vm="" class="menu-item">
+        <a b-86zuwu24vm="" href="blog" class="text-uppercase item-anchor" style="
+        color: yellow;
+        ">Blog</a>
+        </li>
+        <li b-86zuwu24vm="" class="menu-item">
+        <a b-86zuwu24vm="" href="blog.html" class="text-uppercase item-anchor" style="
+        color: yellow;
+        ">Về chúng tôi</a>
+        </li>
+        </ul>
+        </div>
+        <div b-86zuwu24vm="" class="hamburger">
+        <span b-86zuwu24vm="" class="bar"></span>
+        <span b-86zuwu24vm="" class="bar"></span>
+        <span b-86zuwu24vm="" class="bar"></span>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </nav> *@
+        <nav b-86zuwu24vm="" class="secondary-nav">
+            <div b-86zuwu24vm="" class="">
+                <div b-86zuwu24vm="" class="row d-flex flex-wrap justify-content-center">
+                    <div b-86zuwu24vm="" class="col-md-8 col-sm-10" style="justify-items: center;">
+                        <div b-86zuwu24vm="" class="navbar d-flex">
+                            <div b-86zuwu24vm="" class="main-menu stellarnav desktop light">
+                                <ul b-86zuwu24vm="" class="menu-list list-unstyled" style="justify-items: center;">
+                                    <li b-86zuwu24vm="" class="menu-item">
+                                        <a b-86zuwu24vm="" href="/index" class="text-uppercase item-anchor" style="color: yellow;">
+                                            Trang chủ
+                                        </a>
                                     </li>
-                                    <li class="menu-item">
-                                        <a href="/chat" class="text-uppercase item-anchor">Tư vấn nhanh</a>
+
+                                    <!-- Tư vấn nhanh -->
+                                    <li b-86zuwu24vm="" class="menu-item">
+                                        @if (Context.Session.GetString("UserName") != null)
+                                        {
+                                            <a b-86zuwu24vm="" href="/chat" class="text-uppercase item-anchor" style="color: yellow;">
+                                                Tư vấn nhanh
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Authentication/Account" class="text-uppercase item-anchor" style="color: yellow;">
+                                                Tư vấn nhanh
+                                            </a>
+                                        }
                                     </li>
-                                    <li class="menu-item">
-                                        <a href="/Products/ProductList" class="text-uppercase item-anchor">Sản phẩm</a>
+
+                                    <!-- Sản phẩm -->
+                                    <li b-86zuwu24vm="" class="menu-item">
+                                        @if (Context.Session.GetString("UserName") != null)
+                                        {
+                                            <a b-86zuwu24vm="" href="/Products/ProductList" class="text-uppercase item-anchor" style="color: yellow;">
+                                                Sản phẩm
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/Authentication/Account" class="text-uppercase item-anchor" style="color: yellow;">
+                                                Sản phẩm
+                                            </a>
+                                        }
                                     </li>
-                                    <li class="menu-item">
-                                        <a href="#" class="text-uppercase item-anchor">Blog</a>
+
+                                    <li b-86zuwu24vm="" class="menu-item">
+                                        <a b-86zuwu24vm="" href="Blog" class="text-uppercase item-anchor" style="
+    color: yellow;
+">Blog</a>
                                     </li>
-                                    <li class="menu-item">
-                                        <a href="blog.html" class="text-uppercase item-anchor">Về chúng tôi</a>
+                                    <li b-86zuwu24vm="" class="menu-item">
+                                        <a b-86zuwu24vm="" href="blog" class="text-uppercase item-anchor" style="
+    color: yellow;
+">Về chúng tôi</a>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="hamburger">
-                                <span class="bar"></span>
-                                <span class="bar"></span>
-                                <span class="bar"></span>
+                            <div   class="hamburger">
+                                <span   class="bar"></span>
+                                <span   class="bar"></span>
+                                <span   class="bar"></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </nav>
+
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="padding-top: 40px;">
             @RenderBody()
         </main>
     </div>
 
     @*     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - KimTaiPhongThuy - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
+    <div class="container">
+    &copy; 2025 - KimTaiPhongThuy - <a asp-area="" asp-page="/Privacy">Privacy</a>
+    </div>
     </footer> *@
     <footer id="footer" class="bg-grey padding-large overflow-hidden">
         <div class="container">
@@ -111,7 +215,7 @@
                 <div class="footer-content">
                     <div class="row d-flex flex-wrap">
                         <div class="footer-menu col-md-4 col-sm-6 col-xs-6">
-                            <h5 class="widget-title text-uppercase">Quick Links</h5>
+                            <h5 class="widget-title text-uppercase">Truy cập nhanh</h5>
                             <ul class="list-unstyled">
                                 <li>
                                     <a href="/index">Trang Chủ</a>
@@ -131,21 +235,21 @@
                             </ul>
                         </div>
                         <div class="footer-menu col-md-4 col-sm-6 col-xs-6">
-                            <h5 class="widget-title text-uppercase">Your Account</h5>
+                            <h5 class="widget-title text-uppercase">Thông tin Tài Khoản</h5>
                             <ul class="list-unstyled">
                                 <li>
-                                    <a href="#">My Account</a>
+                                    <a href="#">Tài khoản</a>
                                 </li>
                                 <li>
-                                    <a href="#">Login</a>
+                                    <a href="#">Đăng nhập</a>
                                 </li>
                                 <li>
-                                    <a href="#">Wish Lists</a>
+                                    <a href="#">Danh sách đơn</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="footer-menu col-md-4 col-sm-6 col-xs-6">
-                            <img src="images/logo-kimtaiphongthuy.png" alt="main-logo" class="img-fluid mb-4">
+                            <img src="images/WEB/main-logo.png" alt="main-logo" class="img-fluid mb-4">
                             <div class="content">
                                 <div class="widget-content">
                                     <p>Cập nhật những tin tức mới nhất</p>
@@ -158,13 +262,13 @@
                                     <div class="address">
                                         <ul class="list-unstyled">
                                             <li>
-                                                <i class="icon icon-location text-primary"></i>Khu CN Cao Hòa Lạc, Thạch Thất, Hà Nội
+                                                <i class="icon icon-location" style="color: red;"></i>Khu CN Cao Hòa Lạc, Thạch Thất, Hà Nội
                                             </li>
                                             <li>
-                                                <i class="icon icon-phone text-primary"></i>+84 123 456 789
+                                                <i class="icon icon-phone" style="color: red;"></i>+84 123 456 789
                                             </li>
                                             <li>
-                                                <i class="icon icon-envelope text-primary"></i>
+                                                <i class="icon icon-envelope" style="color: red;"></i>
                                                 <div class="mail-address">
                                                     <a href="mailto:hello@templatesjungle.com" class="">kimtaiphongthuy@gmail.com</a>
                                                 </div>
