@@ -60,6 +60,7 @@
                             <li class="menu-item">
                                 @if (Context.Session.GetString("UserName") != null)
                                 {
+                                    <a href="/Order"><i class="icon icon-shopping-cart" style="color: yellow;"></i></a>
                                     <a href="Authentication/Profile" style="color: yellow;">
                                         <i class="icon icon-user"></i>@Context.Session.GetString("UserName")
                                     </a>
@@ -175,14 +176,10 @@
                                     </li>
 
                                     <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="Blog" class="text-uppercase item-anchor" style="
-    color: yellow;
-">Blog</a>
+                                        <a b-86zuwu24vm="" href="Blog" class="text-uppercase item-anchor" style="color: yellow;">Blog</a>
                                     </li>
                                     <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="blog" class="text-uppercase item-anchor" style="
-    color: yellow;
-">Về chúng tôi</a>
+                                        <a b-86zuwu24vm="" href="blog" class="text-uppercase item-anchor" style="color: yellow;">Về chúng tôi</a>
                                     </li>
                                 </ul>
                             </div>

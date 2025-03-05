@@ -1,33 +1,87 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KimTaiPhongThuy.Extension;
+using KimTaiPhongThuy.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace KimTaiPhongThuy.Pages.Order
 {
     public class IndexModel : PageModel
     {
-        public List<CartItem> CartItems { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal Discount { get; set; }
-        public decimal Total => Subtotal - Discount;
+        public List<CartItem> Cart { get; set; } = new List<CartItem>();
+        public decimal TotalAmount { get; set; }
+
 
         public void OnGet()
         {
-            CartItems = new List<CartItem>
-            {
-                new CartItem { Name = "Vòng tay phong thủy", Code = "VT001", Quantity = 1, Price = 10000000, ImageUrl = "/images/vongtay.png" },
-                new CartItem { Name = "Nhẫn bạc phong thủy", Code = "NB001", Quantity = 1, Price = 10000000, ImageUrl = "/images/nhanbac.png" }
-            };
-            Subtotal = CartItems.Sum(item => item.Price * item.Quantity);
-            Discount = 0;
+            Cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+            TotalAmount = Cart.Sum(item => item.TotalPrice);
         }
-    }
 
-    public class CartItem
-    {
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
-        public string ImageUrl { get; set; }
+        public IActionResult OnPostAddToCart(int productId, string productName, decimal price, string? imageUrl)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+            var item = cart.FirstOrDefault(p => p.ProductID == productId);
+            if (item != null)
+            {
+                item.Quantity++;
+            }
+            else
+            {
+                cart.Add(new CartItem
+                {
+                    ProductID = productId,
+                    ProductName = productName,
+                    Price = price,
+                    Quantity = 1,
+                    ImageUrl = imageUrl
+                });
+            }
+
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostRemoveFromCart(int productId)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+            cart.RemoveAll(p => p.ProductID == productId);
+
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+            return RedirectToPage();
+        }
+        public IActionResult OnPostIncreaseQuantity(int productId)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+            var item = cart.FirstOrDefault(p => p.ProductID == productId);
+            if (item != null)
+            {
+                item.Quantity++;
+            }
+
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+            return RedirectToPage();
+        }
+
+        public IActionResult OnPostDecreaseQuantity(int productId)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+            var item = cart.FirstOrDefault(p => p.ProductID == productId);
+            if (item != null)
+            {
+                item.Quantity--;
+                if (item.Quantity <= 0)
+                {
+                    cart.Remove(item);
+                }
+            }
+
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+            return RedirectToPage();
+        }
+
     }
 }

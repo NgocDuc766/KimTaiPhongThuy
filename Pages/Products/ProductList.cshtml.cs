@@ -1,4 +1,5 @@
-﻿using KimTaiPhongThuy.Models;
+﻿using KimTaiPhongThuy.Extension;
+using KimTaiPhongThuy.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -29,13 +30,37 @@ namespace KimTaiPhongThuy.Pages.Products
             {
                 query = query.Where(p => p.CategoryId == SelectedCategoryId.Value);
             }
-            if(!String.IsNullOrEmpty(SearchProductQuery))
+            if (!String.IsNullOrEmpty(SearchProductQuery))
             {
                 query = query.Where(p => p.ProductName.Contains(SearchProductQuery));
             }
 
             Products = query.ToList();
             return Page();
+        }
+        public IActionResult OnPostAddToCart(int productId, string productName, decimal price, string? imageUrl)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
+
+            var item = cart.FirstOrDefault(p => p.ProductID == productId);
+            if (item != null)
+            {
+                item.Quantity++;
+            }
+            else
+            {
+                cart.Add(new CartItem
+                {
+                    ProductID = productId,
+                    ProductName = productName,
+                    Price = price,
+                    Quantity = 1,
+                    ImageUrl = imageUrl
+                });
+            }
+
+            HttpContext.Session.SetObjectAsJson("Cart", cart);
+            return RedirectToPage("./ProductList");
         }
     }
 }
