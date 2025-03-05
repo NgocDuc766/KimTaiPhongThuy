@@ -112,16 +112,18 @@ namespace KimTaiPhongThuy.Pages.Authentication
 
         public IActionResult OnPostLogout()
         {
-            // Xóa session
+            // Xóa session và cookie
             HttpContext.Session.Clear();
-
-            // Xóa cookies (nếu có)
             Response.Cookies.Delete("UserId");
             Response.Cookies.Delete("UserRole");
 
-            // Chuyển hướng về trang đăng nhập
-            return RedirectToPage("/Authentication/Account");
+            // Trả về kết quả JSON chứa URL chuyển hướng
+            return new JsonResult(new { redirectToUrl = Url.Page("/Index") });
         }
+        
+
+
+
 
 
 

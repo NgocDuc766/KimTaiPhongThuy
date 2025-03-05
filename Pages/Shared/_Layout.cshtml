@@ -53,7 +53,7 @@
                                 <div class="alert alert-warning" style="position: absolute; top: 20px; right: 20px; z-index: 999;">
                                     @Context.Session.GetString("ErrorMessage")
                                 </div>
-                                @* Sau khi hiển thị thông báo, xóa thông báo khỏi session *@
+                                @* After displaying the message, remove it from the session *@
                                 Context.Session.Remove("ErrorMessage");
                             }
 
@@ -63,12 +63,11 @@
                                     <a href="Authentication/Profile" style="color: yellow;">
                                         <i class="icon icon-user"></i>@Context.Session.GetString("UserName")
                                     </a>
-                                    @* <!-- Nút Logout -->
-                                <form method="post" asp-page-handler="Logout" style="display:inline;">
-                                <button type="submit" name="logout" value="true" style="background: none; border: none; color: yellow; cursor: pointer;">
-                                <i class="icon icon-logout"></i> Logout
-                                </button>
-                                </form> *@
+
+                                    @* Logout Button - Use a link to the Logout page *@
+                                    <a href="/Authentication/Logout" style="background: none; border: none; color: yellow; cursor: pointer;">
+                                        <i class="icon icon-logout"></i> Logout
+                                    </a>
                                 }
                                 else
                                 {
@@ -78,6 +77,8 @@
                                 }
                             </li>
                         </ul>
+
+
 
 
 
@@ -160,18 +161,11 @@
 
                                     <!-- Sản phẩm -->
                                     <li b-86zuwu24vm="" class="menu-item">
-                                        @if (Context.Session.GetString("UserName") != null)
-                                        {
+                                        
                                             <a b-86zuwu24vm="" href="/Products/ProductList" class="text-uppercase item-anchor" style="color: yellow;">
                                                 Sản phẩm
                                             </a>
-                                        }
-                                        else
-                                        {
-                                            <a href="/Authentication/Account" class="text-uppercase item-anchor" style="color: yellow;">
-                                                Sản phẩm
-                                            </a>
-                                        }
+                                        
                                     </li>
 
                                     <li b-86zuwu24vm="" class="menu-item">
@@ -293,3 +287,4 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+

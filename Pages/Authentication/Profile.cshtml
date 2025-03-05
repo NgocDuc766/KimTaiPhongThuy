@@ -15,6 +15,8 @@ else
     <form method="post">
         <div class="form-group">
             <label for="UserId">User ID</label>
+            <!-- Sử dụng input hidden để truyền giá trị UserId mà không cho phép chỉnh sửa -->
+            <input type="hidden" asp-for="User.UserId" />
             <input type="text" class="form-control" id="UserId" asp-for="User.UserId" disabled />
         </div>
         <div class="form-group">
@@ -46,12 +48,10 @@ else
         <div class="form-group">
             <label for="DateOfBirth">Date of Birth</label>
             <input type="date" class="form-control" id="DateOfBirth" asp-for="User.DateOfBirth" />
-            <span asp-validation-for="User.DateOfBirth" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label for="PhoneNumber">Phone Number</label>
             <input type="text" class="form-control" id="PhoneNumber" asp-for="User.PhoneNumber" />
-            <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary">Update Profile</button>

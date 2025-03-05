@@ -72,7 +72,17 @@
                             <h4 class="shirt_text">@product.ProductName</h4>
                             <p class="price_text">Giá Bán <span style="color: #262626;">@product.Price.ToString("N0") VNĐ</span></p>
                             <div class="btn_main mt-3">
-                                <div class="buy_bt"><a href="#">Mua Ngay</a></div>
+                                @if (HttpContext.Session.GetString("UserName") != null)
+                                {
+                                    <div class="buy_bt"><a href="#">Mua Ngay</a></div>
+
+                                }
+                                else
+                                {
+                                    <a href="/Authentication/Account" class="text-uppercase item-anchor" style="color: red;">
+                                        Mua Ngay
+                                    </a>
+                                }
                                 <div class="seemore_bt"><a href="/Products/ProductDetail?id=@product.ProductId">Xem Thêm</a></div>
                             </div>
                         </div>
