@@ -1,10 +1,65 @@
 ﻿@page
 @model KimTaiPhongThuy.Pages.Admin.UserListModel
-@{
-}
-@if (HttpContext.Session.GetInt32("RoleId") == 1)
+
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #ddd; 
+        padding: 8px;
+        text-align: left;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2; 
+    }
+
+    tr:nth-child(odd) {
+        background-color: #fff; 
+    }
+
+    th {
+        background-color: #4CAF50; 
+        color: white;
+    }
+</style>
+
+@if (HttpContext.Session.GetInt32("RoleId") == 1) 
 {
-    <h1> chien </h1>
+    <h1>User List</h1>
+
+    <p>Total Users: @Model.TotalUserCount</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>UserId</th>
+                <th>UserName</th>
+                <th>ContactName</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>DateOfBirth</th>
+                <th>PhoneNumber</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.UserId</td>
+                    <td>@user.UserName</td>
+                    <td>@user.ContactName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Address</td>
+                    <td>@user.DateOfBirth.ToString("dd/MM/yyyy")</td>
+                    <td>@user.PhoneNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {

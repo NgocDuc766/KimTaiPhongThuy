@@ -40,5 +40,9 @@ namespace KimTaiPhongThuy.DataAccess
         {
             return _context.Users.FirstOrDefault(u => u.Email == email);
         }
+        public IEnumerable<User> GetAllUsers()
+        {
+            return _context.Users.Where(u => u.DeletedAt == null); 
+        }
     }
 }
