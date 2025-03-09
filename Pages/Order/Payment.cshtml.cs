@@ -44,6 +44,7 @@ namespace KimTaiPhongThuy.Pages.Order
                 OrderDate = DateTime.Now,
                 CreatedAt = DateTime.Now,
                 Status = 1,
+                CreatedBy = UsersId
             };
 
             _context.Orders.Add(order);

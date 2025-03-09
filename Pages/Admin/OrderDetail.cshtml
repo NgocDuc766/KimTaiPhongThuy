@@ -1,0 +1,189 @@
+﻿@page
+@model KimTaiPhongThuy.Pages.Admin.OrderDetailModel
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    .order-detail-container {
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+        .order-detail-container h4 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .order-detail-container p {
+            margin: 5px 0;
+        }
+
+    .table {
+        margin-top: 20px;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+
+        .table thead th {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+        }
+
+        .table tbody tr {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+            .table tbody tr:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+        .table tbody td {
+            padding: 12px;
+            vertical-align: middle;
+        }
+
+        .table tfoot th {
+            background-color: #f8f9fa;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+    .product-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+
+    .btn-action {
+        margin-top: 20px;
+    }
+
+    .btn-success, .btn-danger {
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+        .btn-success:hover, .btn-danger:hover {
+            opacity: 0.9;
+        }
+</style>
+@if (HttpContext.Session.GetInt32("RoleId") == 1)
+{
+    <div class="order-detail-container">
+        <h1>Chi tiết đơn hàng</h1>
+
+        <div>
+            <h4>Thông tin người đặt hàng</h4>
+            <p><strong>Tên:</strong> @Model.Order.User.UserName</p>
+            <p><strong>Ngày đặt hàng:</strong> @Model.Order.OrderDate.ToShortDateString()</p>
+            <p><strong>Trạng thái:</strong> <span class="status-badge @GetStatusClass(Model.Order.Status)">@GetStatusName(Model.Order.Status)</span></p>
+        </div>
+
+        <div>
+            <h4>Danh sách sản phẩm</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ảnh</th>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        decimal totalAmount = 0;
+                    }
+                    @foreach (var detail in Model.Order.OrderDetails)
+                    {
+                        var itemTotal = detail.Quantity * detail.Product.Price;
+                        totalAmount += itemTotal;
+
+                        <tr>
+                            <td><img src="@detail.Product.ImageUrl" alt="@detail.Product.ProductName" class="product-image" /></td>
+                            <td>@detail.Product.ProductName</td>
+                            <td>@detail.Quantity</td>
+                            <td>@detail.Product.Price.ToString("N0") VNĐ</td>
+                            <td>@itemTotal.ToString("N0") VNĐ</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4">Tổng cộng</th>
+                        <th>@totalAmount.ToString("N0") VNĐ</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        @if (Model.Order.Status == 1)
+        {
+            <div class="btn-action">
+                <form method="post">
+                    <input type="hidden" name="id" value="@Model.Order.OrderId" />
+                    <button type="submit" asp-page-handler="Confirm" class="btn btn-success">
+                        <i class="fas fa-check"></i> Xác nhận đơn hàng
+                    </button>
+                    <button type="submit" asp-page-handler="Cancel" class="btn btn-danger">
+                        <i class="fas fa-times"></i> Hủy đơn hàng
+                    </button>
+                </form>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="no-access">
+        <h1>404 NOT FOUND</h1>
+    </div>
+}
+
+@functions {
+    public string GetStatusName(int status)
+    {
+        switch (status)
+        {
+            case 0: return "Đã hủy";
+            case 1: return "Đang xử lý";
+            case 2: return "Đang giao hàng";
+            case 3: return "Đã giao hàng";
+            default: return "Không xác định";
+        }
+    }
+
+    public string GetStatusClass(int status)
+    {
+        switch (status)
+        {
+            case 0: return "status-cancelled";
+            case 1: return "status-processing";
+            case 2: return "status-shipping";
+            case 3: return "status-delivered";
+            default: return "status-unknown";
+        }
+    }
+}

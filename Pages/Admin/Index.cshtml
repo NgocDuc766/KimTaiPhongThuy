@@ -2,3 +2,45 @@
 @model KimTaiPhongThuy.Pages.Admin.IndexModel
 @{
 }
+@if (HttpContext.Session.GetInt32("RoleId") == 1)
+{
+        <div class="col-md-9">
+                <!-- Main Content -->
+                <h2>Chào mừng đến với trang quản trị</h2>
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="card text-white bg-primary mb-3">
+                            <div class="card-header">Sản phẩm</div>
+                            <div class="card-body">
+                                <h5 class="card-title">100</h5>
+                                <p class="card-text">Tổng số sản phẩm</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-white bg-success mb-3">
+                            <div class="card-header">Đơn hàng</div>
+                            <div class="card-body">
+                                <h5 class="card-title">50</h5>
+                                <p class="card-text">Đơn hàng đang xử lý</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-white bg-warning mb-3">
+                            <div class="card-header">Người dùng</div>
+                            <div class="card-body">
+                                <h5 class="card-title">200</h5>
+                                <p class="card-text">Tổng số người dùng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+}
+else
+{
+    <div class="no-access">
+        <h1>404 NOT FOUND</h1>
+    </div>
+}

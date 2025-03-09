@@ -1,0 +1,121 @@
+﻿@page
+@model KimTaiPhongThuy.Pages.Admin.OrderModel
+@{
+    ViewData["Title"] = "Quản lý đơn hàng";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    .table thead th {
+        background-color: #4CAF50;
+        color: white;
+    }
+    .table tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .status-cancelled {
+        background-color: #ffcccc;
+        color: #cc0000;
+    }
+    .status-processing {
+        background-color: #cce5ff;
+        color: #004080;
+    }
+    .status-shipping {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+    .status-delivered {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    .status-unknown {
+        background-color: #f8f9fa;
+        color: #6c757d;
+    }
+    .btn-detail {
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    .btn-detail:hover {
+        background-color: #0056b3;
+    }
+</style>
+@if (HttpContext.Session.GetInt32("RoleId") == 1)
+{
+    <h1 class="mb-4">Quản lý đơn hàng</h1>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Mã đơn hàng</th>
+                <th>Người đặt hàng</th>
+                <th>Ngày đặt hàng</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model.Orders)
+            {
+                <tr>
+                    <td>@order.OrderId</td>
+                    <td>@order.User.UserName</td>
+                    <td>@order.OrderDate.ToShortDateString()</td>
+                    <td>
+                        <span class="status-badge @GetStatusClass(order.Status)">
+                            @GetStatusName(order.Status)
+                        </span>
+                    </td>
+                    <td>
+                        <a class="btn-detail" asp-page="./OrderDetail" asp-route-id="@order.OrderId">
+                            <i class="fas fa-info-circle"></i> Chi tiết
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="no-access">
+        <h1>404 NOT FOUND</h1>
+    </div>
+
+}
+
+@functions {
+    public string GetStatusName(int status)
+    {
+        switch (status)
+        {
+            case 0: return "Đã hủy";
+            case 1: return "Đang xử lý";
+            case 2: return "Đang giao hàng";
+            case 3: return "Đã giao hàng";
+            default: return "Không xác định";
+        }
+    }
+
+    public string GetStatusClass(int status)
+    {
+        switch (status)
+        {
+            case 0: return "status-cancelled";
+            case 1: return "status-processing";
+            case 2: return "status-shipping";
+            case 3: return "status-delivered";
+            default: return "status-unknown";
+        }
+    }
+}

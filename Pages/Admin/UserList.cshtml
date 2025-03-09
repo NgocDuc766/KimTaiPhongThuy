@@ -5,44 +5,50 @@
     table {
         width: 100%;
         border-collapse: collapse;
+        margin-top: 20px;
     }
 
     th, td {
-        border: 1px solid #ddd; 
-        padding: 8px;
+        padding: 12px;
         text-align: left;
     }
 
-    tr:nth-child(even) {
-        background-color: #f2f2f2; 
-    }
-
-    tr:nth-child(odd) {
-        background-color: #fff; 
-    }
-
     th {
-        background-color: #4CAF50; 
+        background-color: #4CAF50;
         color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .no-access {
+        text-align: center;
+        padding: 50px;
+        font-size: 24px;
+        color: #555;
     }
 </style>
 
-@if (HttpContext.Session.GetInt32("RoleId") == 1) 
+@if (HttpContext.Session.GetInt32("RoleId") == 1)
 {
-    <h1>User List</h1>
-
-    <p>Total Users: @Model.TotalUserCount</p>
+    <h1>Danh sách người dùng</h1>
+    <p>Tổng số người dùng: @Model.TotalUserCount</p>
 
     <table>
         <thead>
             <tr>
-                <th>UserId</th>
-                <th>UserName</th>
-                <th>ContactName</th>
+                <th>ID</th>
+                <th>Tên người dùng</th>
+                <th>Tên liên hệ</th>
                 <th>Email</th>
-                <th>Address</th>
-                <th>DateOfBirth</th>
-                <th>PhoneNumber</th>
+                <th>Địa chỉ</th>
+                <th>Ngày sinh</th>
+                <th>Số điện thoại</th>
             </tr>
         </thead>
         <tbody>
@@ -63,5 +69,7 @@
 }
 else
 {
-    <h1>error</h1>
+    <div class="no-access">
+        <h1>404 NOT FOUND</h1>
+    </div>
 }
