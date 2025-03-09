@@ -103,11 +103,12 @@ namespace KimTaiPhongThuy.Pages.Authentication
             // Lưu thông tin người dùng vào session (hoặc cookie)
             HttpContext.Session.SetString("UserName", user.UserName); // Lưu tên người dùng vào session
             HttpContext.Session.SetInt32("UserId", user.UserId); // Lưu ID người dùng vào session
+            HttpContext.Session.SetInt32("RoleId", user.RoleId); // Lưu RoleID người dùng vào session
             Response.Cookies.Append("UserId", user.UserId.ToString(), cookieOptions);
             Response.Cookies.Append("UserRole", user.RoleId.ToString(), cookieOptions);
 
             // Chuyển hướng theo vai trò của người dùng
-            return user.RoleId == 1 ? RedirectToPage("/Admin/Dashboard") : RedirectToPage("/Index");
+            return user.RoleId == 1 ? RedirectToPage("/Admin/UserList") : RedirectToPage("/Index");
         }
 
 

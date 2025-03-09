@@ -1,0 +1,12 @@
+﻿@page
+@model KimTaiPhongThuy.Pages.Admin.UserListModel
+@{
+}
+@if (HttpContext.Session.GetInt32("RoleId") == 1)
+{
+    <h1> chien </h1>
+}
+else
+{
+    <h1>error</h1>
+}
