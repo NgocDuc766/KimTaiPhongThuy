@@ -25,24 +25,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Poiret+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header   style="
+    <header style="
     background-color: darkred;
 ">
-        <nav   class="secondary-nav border-top border-bottom">
-            <div   class="">
-                <div   class="row">
-                    <div   class="top-menu d-flex flex-wrap justify-content-between">
-                        <div   class="left-block d-flex flex-wrap list-unstyled justify-content-start">
-                            <li   class="menu-item">
+        <nav class="secondary-nav border-top border-bottom">
+            <div class="">
+                <div class="row">
+                    <div class="top-menu d-flex flex-wrap justify-content-between">
+                        <div class="left-block d-flex flex-wrap list-unstyled justify-content-start">
+                            <li class="menu-item">
                                 <form class="searchbar">
-                                    <input   type="text" name="search" placeholder="Search Here..">
-                                    <i   class="icon icon-search"></i>
+                                    <input type="text" name="search" placeholder="Search Here..">
+                                    <i class="icon icon-search"></i>
                                 </form>
                             </li>
                         </div>
-                        <div   class="right-block d-flex flex-wrap justify-content-center">
-                            <div   class="main-logo">
-                                <a   href="index">
+                        <div class="right-block d-flex flex-wrap justify-content-center">
+                            <div class="main-logo">
+                                <a href="index">
                                     <img src="~/images/WEB/main-logo.png" alt="logo" style="height:40px; width:100%">
                                 </a>
                             </div>
@@ -162,25 +162,40 @@
 
                                     <!-- Sản phẩm -->
                                     <li b-86zuwu24vm="" class="menu-item">
-                                        
-                                            <a b-86zuwu24vm="" href="/Products/ProductList" class="text-uppercase item-anchor" style="color: yellow;">
-                                                Sản phẩm
-                                            </a>
-                                        
-                                    </li>
 
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="Blog" class="text-uppercase item-anchor" style="color: yellow;">Blog</a>
+                                        <a b-86zuwu24vm="" href="/Products/ProductList" class="text-uppercase item-anchor" style="color: yellow;">
+                                            Sản phẩm
+                                        </a>
+
                                     </li>
-                                    <li b-86zuwu24vm="" class="menu-item">
-                                        <a b-86zuwu24vm="" href="blog" class="text-uppercase item-anchor" style="color: yellow;">Về chúng tôi</a>
-                                    </li>
+                                    @if (Context.Session.GetInt32("RoleId") == 1)
+                                    {
+                                        <li b-86zuwu24vm="" class="menu-item">
+                                            <a b-86zuwu24vm="" href="/Admin/UserList" class="text-uppercase item-anchor" style="color: yellow;">Người Dùng</a>
+                                        </li>
+
+                                        <li b-86zuwu24vm="" class="menu-item">
+                                            <a b-86zuwu24vm="" href="/Admin/Order" class="text-uppercase item-anchor" style="color: yellow;">Đơn Hàng</a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li b-86zuwu24vm="" class="menu-item">
+                                            <a b-86zuwu24vm="" href="Blog" class="text-uppercase item-anchor" style="color: yellow;">Blog</a>
+                                        </li>
+
+                                        <li b-86zuwu24vm="" class="menu-item">
+                                            <a b-86zuwu24vm="" href="blog" class="text-uppercase item-anchor" style="color: yellow;">Về chúng tôi</a>
+                                        </li>
+                                    }
+
+
                                 </ul>
                             </div>
-                            <div   class="hamburger">
-                                <span   class="bar"></span>
-                                <span   class="bar"></span>
-                                <span   class="bar"></span>
+                            <div class="hamburger">
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
                             </div>
                         </div>
                     </div>

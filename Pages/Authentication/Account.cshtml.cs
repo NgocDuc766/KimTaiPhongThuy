@@ -108,7 +108,7 @@ namespace KimTaiPhongThuy.Pages.Authentication
             Response.Cookies.Append("UserRole", user.RoleId.ToString(), cookieOptions);
 
             // Chuyển hướng theo vai trò của người dùng
-            return user.RoleId == 1 ? RedirectToPage("/Admin/UserList") : RedirectToPage("/Index");
+            return user.RoleId == 1 ? RedirectToPage("/Admin/Index") : RedirectToPage("/Index");
         }
 
 
