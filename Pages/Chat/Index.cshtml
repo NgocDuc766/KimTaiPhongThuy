@@ -7,24 +7,29 @@
 @Html.AntiForgeryToken()
 
 <link rel="stylesheet" type="text/css" href="~/css/botchat.css">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
-<div style="padding-top: 100px;">
+@* <button id="chatbot-toggle-btn"><img src="chatbot.png" alt="buttonpng" /></button> *@
+<div style="
+    padding-top: 100px;
+">
     <div class="chat-header">
         <span>Chatbot | <a>KimTaiPhongThuy Assistant</a></span>
-        <button id="close-btn">×</button>
+        <button id="close-btn">&times;</button>
     </div>
     <div class="chat-box" id="chat-box">
         <div class="bot-message">
-            Chào bạn,<br>Bạn muốn tư vấn gì ngày hôm nay?
+            Chào bạn,
+            Bạn muốn tư vấn gì ngày hôm nay ?
         </div>
     </div>
     <div class="chat-input">
         <input type="text" id="user-input" placeholder="Type a message...">
         <button id="send-btn">Send</button>
     </div>
+
 </div>
 
 <script>
@@ -64,10 +69,13 @@
         const messageElement = document.createElement('div');
         messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
 
-        // Xử lý định dạng
-        let formattedMessage = message
-            .replace(/\*/g, '<br>') // Thay * đơn bằng xuống dòng
-            // .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Thay **nội dung** bằng in đậm
+        // Bước 1: Xử lý in đậm với **...**
+        let formattedMessage = message.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Bước 2: Xử lý xuống dòng với * (chỉ áp dụng cho * không nằm trong **...**)
+        formattedMessage = formattedMessage.replace(/^(\s*)\*(?![\s*])(?=\s)/gm, '$1<br>$1    ');
+
+        formattedMessage = formattedMessage.replace(/^(\s*)(\d+\.)(?=\s|$)/gm, '$1<br>$1');
 
         messageElement.innerHTML = formattedMessage;
         chatBox.appendChild(messageElement);
