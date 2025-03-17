@@ -1,35 +1,36 @@
 ﻿@page
 @model KimTaiPhongThuy.Pages.Chat.IndexModel
 @{
+    ViewData["Title"] = "Tư vấn phong thủy";
 }
 
-<link rel="stylesheet" type="text/css" href="~/css/botchat.css">
+@Html.AntiForgeryToken()
 
+<link rel="stylesheet" type="text/css" href="~/css/botchat.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-@* <button id="chatbot-toggle-btn"><img src="chatbot.png" alt="buttonpng" /></button> *@
-<div style="
-    padding-top: 100px;
-">
-<div class="chat-header">
-    <span>Chatbot | <a>KimTaiPhongThuy Assistant</a></span>
-    <button id="close-btn">&times;</button>
-</div>
-<div class="chat-box" id="chat-box">
-    <div class="bot-message">
-        Chào bạn,
-        Bạn muốn tư vấn gì ngày hôm nay ?
+
+<div style="padding-top: 100px;">
+    <div class="chat-header">
+        <span>Chatbot | <a>KimTaiPhongThuy Assistant</a></span>
+        <button id="close-btn">×</button>
+    </div>
+    <div class="chat-box" id="chat-box">
+        <div class="bot-message">
+            Chào bạn,<br>Bạn muốn tư vấn gì ngày hôm nay?
+        </div>
+    </div>
+    <div class="chat-input">
+        <input type="text" id="user-input" placeholder="Type a message...">
+        <button id="send-btn">Send</button>
     </div>
 </div>
-<div class="chat-input">
-    <input type="text" id="user-input" placeholder="Type a message...">
-    <button id="send-btn">Send</button>
-</div>
 
-</div>
 <script>
-    // document.getElementById('chatbot-toggle-btn').addEventListener('click', toggleChatbot);
+    let chatHistory = []; // Lưu trữ lịch sử chat trong phiên
+
+    // Sự kiện
     document.getElementById('close-btn').addEventListener('click', toggleChatbot);
     document.getElementById('send-btn').addEventListener('click', sendMessage);
     document.getElementById('user-input').addEventListener('keypress', function (e) {
@@ -38,77 +39,162 @@
         }
     });
 
+    // Toggle chatbot (nếu cần)
     function toggleChatbot() {
         const chatbotPopup = document.getElementById('chatbot-popup');
-        chatbotPopup.style.display = chatbotPopup.style.display === 'none' ? 'block' : 'none';
+        if (chatbotPopup) {
+            chatbotPopup.style.display = chatbotPopup.style.display === 'none' ? 'block' : 'none';
+        }
     }
 
+    // Gửi tin nhắn
     function sendMessage() {
         const userInput = document.getElementById('user-input').value.trim();
         if (userInput !== '') {
             appendMessage('user', userInput);
+            chatHistory.push({ role: 'user', text: userInput });
+            saveChatToServer('user', userInput); // Lưu lên server
             getResponseFromGemini(userInput);
             document.getElementById('user-input').value = '';
         }
     }
 
-     async function getResponseFromGemini(userInput) {
-        try{
-            const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDiWv8s0LE2FoIsvuYc7cThSjpImGWW-xE', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-            "contents": [
-                {
-                    "parts": [
+    function appendMessage(sender, message) {
+        const chatBox = document.getElementById('chat-box');
+        const messageElement = document.createElement('div');
+        messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+
+        // Xử lý định dạng
+        let formattedMessage = message
+            .replace(/\*/g, '<br>') // Thay * đơn bằng xuống dòng
+            // .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Thay **nội dung** bằng in đậm
+
+        messageElement.innerHTML = formattedMessage;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        if (sender === 'bot') {
+            chatHistory.push({ role: 'model', text: message });
+            saveChatToServer('bot', message);
+        }
+    }
+
+
+    // Lưu tin nhắn lên server
+    async function saveChatToServer(sender, message) {
+        try {
+            const token = document.querySelector('[name="__RequestVerificationToken"]')?.value;
+            if (!token) {
+                throw new Error('Không tìm thấy CSRF token');
+            }
+
+            const response = await fetch('/Chat/Index?handler=SaveChatAsync', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'RequestVerificationToken': token // Sửa tên header cho đúng với Razor Pages
+                },
+                body: JSON.stringify({
+                    message: message,
+                    sender: sender === 'user' ? 1 : 0
+                })
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text(); // Lấy thông tin lỗi từ server
+                throw new Error(`Lỗi lưu chat: ${response.status} - ${errorText}`);
+            }
+
+            console.log('Lưu chat thành công');
+        } catch (error) {
+            console.error('Lỗi khi lưu chat:', error);
+        }
+    }
+
+    // Tải lịch sử chat khi khởi động
+    async function loadChatHistory() {
+        try {
+            const response = await fetch('/Chat/Index?handler=ChatHistory');
+            const history = await response.json();
+
+            // Kiểm tra nếu history tồn tại và là mảng có dữ liệu
+            if (history && Array.isArray(history) && history.length > 0) {
+                chatHistory = history.map(item => ({
+                    role: item.sender === 1 ? 'user' : 'bot',
+                    text: item.message
+                }));
+                chatHistory.forEach(msg => appendMessage(msg.role, msg.text));
+            } else {
+                console.log('Chưa có lịch sử chat.');
+                // Có thể hiển thị tin nhắn mặc định nếu muốn
+                // appendMessage('bot', 'Chào bạn, bạn muốn tư vấn gì hôm nay?');
+            }
+        } catch (error) {
+            console.error('Lỗi khi tải lịch sử chat:', error);
+        }
+    }
+
+    async function getResponseFromGemini(userInput) {
+        try {
+            // Tạo mảng contents bao gồm lịch sử chat và tin nhắn mới
+            const contents = [];
+
+            // Thêm lịch sử chat vào contents (nếu có)
+            chatHistory.forEach(msg => {
+                contents.push({
+                    role: msg.role === 'user' ? 'user' : 'model', // Thêm role: user hoặc model
+                    parts: [
                         {
-                            "text": userInput
+                            text: msg.text // Chỉ gửi nội dung tin nhắn, không cần thêm "Người dùng: " hay "Bot: "
                         }
                     ]
-                }
-            ]
-        })
-        });
+                });
+            });
 
+            // Thêm tin nhắn mới nhất của người dùng
+            contents.push({
+                role: 'user', // Tin nhắn của người dùng luôn là 'user'
+                parts: [
+                    {
+                        text: userInput
+                    }
+                ]
+            });
+
+            // Gửi request tới Gemini API
+            const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyDiWv8s0LE2FoIsvuYc7cThSjpImGWW-xE', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    contents: contents
+                })
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Lỗi gọi API Gemini: ${response.status} - ${errorText}`);
+            }
 
             const data = await response.json();
-            console.log('Dữ liệu trả về:', data.candidates[0]?.content.parts[0].text); // Xem dữ liệu trả về trong console
-
-            // Lấy nội dung trả lời từ API
             const reply = data.candidates[0]?.content.parts[0].text || "Xin lỗi, hiện tại không thể kết nối với máy chủ.";
 
-            setTimeout(function () {
+            setTimeout(() => {
                 appendMessage('bot', reply);
                 if (reply.includes("không hiểu")) {
                     showYesNoOptions();
                 }
             }, 500);
-
-
-            } catch (error) {
-            console.error('Lỗi khi gọi API:', error);
+        } catch (error) {
+            console.error('Lỗi khi gọi API:', error.message);
             appendMessage('bot', "Xin lỗi, hiện tại không thể kết nối với máy chủ.");
         }
     }
 
-
-
-
-
-    function appendMessage(sender, message) {
-        const chatBox = document.getElementById('chat-box');
-        const messageElement = document.createElement('div');
-        messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
-        messageElement.innerHTML = message;
-        chatBox.appendChild(messageElement);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
+    // Hiển thị nút Yes/No
     function showYesNoOptions() {
         const chatBox = document.getElementById('chat-box');
-
         const buttonYes = document.createElement('button');
         buttonYes.textContent = '✔ Yes';
         buttonYes.onclick = function () {
@@ -128,4 +214,8 @@
         chatBox.appendChild(buttonContainer);
     }
 
+    // Tải lịch sử khi khởi động
+    window.onload = function () {
+        loadChatHistory();
+    };
 </script>

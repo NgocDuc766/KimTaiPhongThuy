@@ -39,6 +39,7 @@ namespace KimTaiPhongThuy
             builder.Services.AddScoped<AuthenticationDAO>();
             builder.Services.AddScoped<ProductDAO>();
 
+            builder.Services.AddAntiforgery();
 
             var app = builder.Build();
 

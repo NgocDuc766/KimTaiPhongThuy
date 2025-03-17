@@ -156,7 +156,7 @@ namespace KimTaiPhongThuy.Pages.Authentication
 
             if (string.IsNullOrEmpty(User.PhoneNumber))
             {
-                User.PhoneNumber = "000-000-0000"; // Giá trị mặc định cho số điện thoại
+                User.PhoneNumber = "0000000000"; // Giá trị mặc định cho số điện thoại
             }
 
             if (User.Gender == null) // Kiểm tra nếu chưa có giá trị cho Gender
