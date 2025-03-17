@@ -147,21 +147,6 @@
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     }
 
-/*.bot-message {
-    background-color: #8C0000;
-    color: #fff;
-    padding: 14px;
-    border-radius: 15px;
-    margin-bottom: 10px;
-    margin-top: 15px;
-    align-self: flex-start;*/ /* Move bot message to the left */
-/*margin-right: 10px;*/ /* Push bot message to the right */
-/*position: relative;
-    display: flex;
-    align-items: center;
-    flex-direction: column;*/ /* Adjust for button placement */
-/*}*/
-
 .bot-message {
     background-color: #8C0000;
     color: white; /* Đảm bảo màu chữ trắng dễ đọc */
