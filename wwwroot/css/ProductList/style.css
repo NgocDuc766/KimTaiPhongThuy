@@ -1,20 +1,8 @@
 /* Basic Reset and Typography */
 
-body {
-    font-family: 'Raleway', sans-serif;
-    font-size: 14px;
-    color: #666666;
-    line-height: 1.80857;
-    margin: 0;
-    padding: 0;
-}
 
-a {
-    color: #222222;
-    text-decoration: none;
-    outline: none;
-    transition: all .3s ease-in-out;
-}
+
+
 
     a:hover {
         color: #8c0000;
@@ -37,24 +25,9 @@ h4 {
     font-weight: bold;
 }
 
-p {
-    margin: 0;
-    font-size: 16px;
-}
 
 /* Header Section */
-.banner_bg_main {
-    width: 100%;
-    background-image: url(../images/banner-bg.png);
-    background-size: 100%;
-    background-repeat: no-repeat;
-    margin-top: 50px;
-}
 
-.header_section {
-    width: 100%;
-    display: flex;
-}
 
 .containt_main {
     display: flex;
